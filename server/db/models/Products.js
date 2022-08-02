@@ -48,13 +48,3 @@ const Product = db.define('product', {
   })
   
 module.exports = Product
-//   Products:
-// productName - string
-// Description - string
-// Platform (e.g., console)
-// Genre (games only)
-// Price (int)
-// Image (url?)
-// ESRB rating (maybe in description?)
-// Rating (Metacritic only)
-// Number of Players (up to x)
