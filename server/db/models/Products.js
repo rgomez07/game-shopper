@@ -10,7 +10,7 @@ const Product = db.define('product', {
     description: {
       type: Sequelize.TEXT,
     },
-    plateform: {
+    platform: {
         type: Sequelize.STRING,
         unique: true,
         allowNull: false
