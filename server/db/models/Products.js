@@ -4,25 +4,22 @@ const db = require('../db')
 const Product = db.define('product', {
     name: {
       type: Sequelize.STRING,
-      unique: true,
       allowNull: false
     },
     description: {
       type: Sequelize.TEXT,
+      allowNull: false
     },
     platform: {
         type: Sequelize.STRING,
-        unique: true,
         allowNull: false
     },
     genre: {
         type: Sequelize.STRING,
-        unique: true,
         allowNull: false
     },
     price: {
         type: Sequelize.INTEGER,
-        unique: true,
         allowNull: false
     },
     image: {
@@ -31,17 +28,15 @@ const Product = db.define('product', {
     },
     esrb: {
         type: Sequelize.STRING,
-        unique: true,
         allowNull: false
     },
     rating: {
         type: Sequelize.INTEGER,
-        unique: true,
+        allowNull: false
         
     },
     players: {
         type: Sequelize.INTEGER,
-        unique: true,
         allowNull: false
     }
 
