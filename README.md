@@ -1,12 +1,1 @@
-# grace-shopper
-
-
-Rigo Hello
-HHIHIHI
-
-alexxx
-
-
-## testing this is amaan
-
-
+# THIS IS AMAAN'S PROJECT - Y'ALL WORK FOR ME NOW
