@@ -4,6 +4,7 @@ const {
 } = require('../db');
 module.exports = router;
 
+// GET all products /api/products
 router.get('/', async (req, res, next) => {
   try {
     const products = await Product.findAll();
@@ -12,6 +13,8 @@ router.get('/', async (req, res, next) => {
     next(err);
   }
 });
+
+// GET /api/products/:id
 router.get('/:id', async (req, res, next) => {
   //productid
   try {
