@@ -1,7 +1,9 @@
+
 const Sequelize = require('sequelize');
 const db = require('../db');
 
 const Product = db.define('product', {
+
   name: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -29,13 +31,18 @@ const Product = db.define('product', {
   esrb: {
     type: Sequelize.STRING,
     allowNull: false,
+    defaultValue: "./images/Game_placeholder.png",
+  },
+  esrb: {
+    type: Sequelize.STRING,
+    defaultValue: "Not rated",
   },
   rating: {
     type: Sequelize.INTEGER,
     allowNull: false,
   },
-  players: {
-    type: Sequelize.INTEGER,
+  multiplayer: {
+    type: Sequelize.STRING,
     allowNull: false,
   },
 });
