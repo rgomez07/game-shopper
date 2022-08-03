@@ -2092,10 +2092,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
-/* harmony import */ var _components_AuthForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/AuthForm */ "./client/components/AuthForm.js");
-/* harmony import */ var _components_Home__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Home */ "./client/components/Home.js");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./store */ "./client/store/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var _components_Users_AllUsers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Users/AllUsers */ "./client/components/Users/AllUsers.js");
+/* harmony import */ var _components_Users_SingleUser__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Users/SingleUser */ "./client/components/Users/SingleUser.js");
+/* harmony import */ var _components_AuthForm__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/AuthForm */ "./client/components/AuthForm.js");
+/* harmony import */ var _components_Home__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Home */ "./client/components/Home.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./store */ "./client/store/index.js");
+
+
 
 
 
@@ -2115,21 +2119,27 @@ class Routes extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     const {
       isLoggedIn
     } = this.props;
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, isLoggedIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Route, {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, isLoggedIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
       path: "/home",
-      component: _components_Home__WEBPACK_IMPORTED_MODULE_3__["default"]
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Redirect, {
-      to: "/home"
-    })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Route, {
+      component: _components_Home__WEBPACK_IMPORTED_MODULE_5__["default"]
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
+      exact: true,
+      path: "/users",
+      component: _components_Users_AllUsers__WEBPACK_IMPORTED_MODULE_2__["default"]
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
+      exact: true,
+      path: "/users/:id",
+      component: _components_Users_SingleUser__WEBPACK_IMPORTED_MODULE_3__["default"]
+    })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
       path: "/",
       exact: true,
-      component: _components_AuthForm__WEBPACK_IMPORTED_MODULE_2__.Login
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Route, {
+      component: _components_AuthForm__WEBPACK_IMPORTED_MODULE_4__.Login
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
       path: "/login",
-      component: _components_AuthForm__WEBPACK_IMPORTED_MODULE_2__.Login
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Route, {
+      component: _components_AuthForm__WEBPACK_IMPORTED_MODULE_4__.Login
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
       path: "/signup",
-      component: _components_AuthForm__WEBPACK_IMPORTED_MODULE_2__.Signup
+      component: _components_AuthForm__WEBPACK_IMPORTED_MODULE_4__.Signup
     })));
   }
 
@@ -2150,7 +2160,7 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     loadInitialData() {
-      dispatch((0,_store__WEBPACK_IMPORTED_MODULE_4__.me)());
+      dispatch((0,_store__WEBPACK_IMPORTED_MODULE_6__.me)());
     }
 
   };
@@ -2158,7 +2168,7 @@ const mapDispatch = dispatch => {
 // when the url changes
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.withRouter)((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapState, mapDispatch)(Routes)));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_router_dom__WEBPACK_IMPORTED_MODULE_7__.withRouter)((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapState, mapDispatch)(Routes)));
 
 /***/ }),
 
@@ -2321,7 +2331,9 @@ const Navbar = ({
 }, "Home"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
   href: "#",
   onClick: handleClick
-}, "Logout")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+}, "Logout"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+  to: "/users"
+}, "Users")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
   to: "/login"
 }, "Login"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
   to: "/signup"
@@ -2347,6 +2359,107 @@ const mapDispatch = dispatch => {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapState, mapDispatch)(Navbar));
+
+/***/ }),
+
+/***/ "./client/components/Users/AllUsers.js":
+/*!*********************************************!*\
+  !*** ./client/components/Users/AllUsers.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "AllUsers": () => (/* binding */ AllUsers),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _store_users__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../store/users */ "./client/store/users.js");
+
+
+
+
+class AllUsers extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
+  componentDidMount() {
+    this.props.fetchUsers();
+  }
+
+  render() {
+    {
+      console.log(this.props.users);
+    }
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, this.props.users.map(user => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      key: user.id
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+      to: `/users/${user.id}`
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), user.username))));
+  }
+
+}
+
+const mapState = state => {
+  return {
+    users: state.userListReducer
+  };
+};
+
+const mapDispatch = dispatch => ({
+  fetchUsers: () => dispatch((0,_store_users__WEBPACK_IMPORTED_MODULE_2__.fetchUser)())
+});
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapState, mapDispatch)(AllUsers));
+
+/***/ }),
+
+/***/ "./client/components/Users/SingleUser.js":
+/*!***********************************************!*\
+  !*** ./client/components/Users/SingleUser.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _store_singleUser__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../store/singleUser */ "./client/store/singleUser.js");
+
+
+
+
+
+class SingeUser extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
+  constructor() {
+    super();
+  }
+
+  componentDidMount() {
+    this.props.fetchSingleUser(this.props.match.params.id);
+  }
+
+  render() {
+    const {
+      admin
+    } = this.props.singleUser;
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, this.props.singleUser.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, admin), console.log(this.props.singleUser));
+  }
+
+}
+
+const mapState = state => ({
+  singleUser: state.singleUserReducer
+});
+
+const mapDispatch = dispatch => ({
+  fetchSingleUser: id => dispatch((0,_store_singleUser__WEBPACK_IMPORTED_MODULE_2__.fetchSingleUser)(id))
+});
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapState, mapDispatch)(SingeUser));
 
 /***/ }),
 
@@ -2455,78 +2568,6 @@ __webpack_require__.r(__webpack_exports__);
 
 const history =  false ? 0 : (0,history__WEBPACK_IMPORTED_MODULE_0__.createBrowserHistory)();
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (history);
-
-/***/ }),
-
-/***/ "./client/store/AdminUsersList.js":
-/*!****************************************!*\
-  !*** ./client/store/AdminUsersList.js ***!
-  \****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "addUser": () => (/* binding */ addUser),
-/* harmony export */   "default": () => (/* binding */ userListReducer),
-/* harmony export */   "deleteUser": () => (/* binding */ deleteUser),
-/* harmony export */   "fetchUser": () => (/* binding */ fetchUser),
-/* harmony export */   "setUser": () => (/* binding */ setUser),
-/* harmony export */   "toAddUser": () => (/* binding */ toAddUser),
-/* harmony export */   "toDeleteUser": () => (/* binding */ toDeleteUser)
-/* harmony export */ });
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
- //Action types
-
-const SET_USERS = 'SET_USERS';
-const ADD_USER = 'ADD_USER';
-const DELETE_USER = 'DELETE_USER'; //Action creators
-
-const setUser = users => ({
-  type: SET_USERS,
-  users
-});
-const addUser = user => ({
-  type: ADD_USER,
-  user
-});
-const deleteUser = id => ({
-  type: DELETE_USER,
-  id
-}); // Thunk creators
-
-const fetchUser = () => async dispatch => {
-  const {
-    data
-  } = await axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/users');
-  dispatch(setUser(data));
-};
-const toAddUser = (userList, history) => async dispatch => {
-  await axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/users', userList);
-  dispatch(addUser(userList));
-  history.push('/users');
-};
-const toDeleteUser = (id, history) => async dispatch => {
-  await axios__WEBPACK_IMPORTED_MODULE_0___default()["delete"](`/api/users/${id}`).then(() => dispatch(deleteUser(id)));
-  history.push('/users');
-}; //Reducer
-
-function userListReducer(state = [], action) {
-  switch (action.type) {
-    case SET_USERS:
-      return action.users;
-
-    case ADD_USER:
-      return [...state, action.user];
-
-    case DELETE_USER:
-      return [...state].filter(userState => userState.id !== action.id);
-
-    default:
-      return state;
-  }
-}
 
 /***/ }),
 
@@ -2640,7 +2681,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _auth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./auth */ "./client/store/auth.js");
 /* harmony import */ var _singleProduct__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./singleProduct */ "./client/store/singleProduct.js");
 /* harmony import */ var _singleUser__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./singleUser */ "./client/store/singleUser.js");
-/* harmony import */ var _AdminUsersList__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./AdminUsersList */ "./client/store/AdminUsersList.js");
+/* harmony import */ var _users__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./users */ "./client/store/users.js");
 /* harmony import */ var _products__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./products */ "./client/store/products.js");
 
 
@@ -2655,7 +2696,7 @@ const reducer = (0,redux__WEBPACK_IMPORTED_MODULE_7__.combineReducers)({
   auth: _auth__WEBPACK_IMPORTED_MODULE_2__["default"],
   singleProductReducer: _singleProduct__WEBPACK_IMPORTED_MODULE_3__["default"],
   singleUserReducer: _singleUser__WEBPACK_IMPORTED_MODULE_4__["default"],
-  userListReducer: _AdminUsersList__WEBPACK_IMPORTED_MODULE_5__["default"],
+  userListReducer: _users__WEBPACK_IMPORTED_MODULE_5__["default"],
   productsReducer: _products__WEBPACK_IMPORTED_MODULE_6__["default"]
 });
 const middleware = (0,redux_devtools_extension__WEBPACK_IMPORTED_MODULE_1__.composeWithDevTools)((0,redux__WEBPACK_IMPORTED_MODULE_7__.applyMiddleware)(redux_thunk__WEBPACK_IMPORTED_MODULE_8__["default"], (0,redux_logger__WEBPACK_IMPORTED_MODULE_0__.createLogger)({
@@ -2811,6 +2852,78 @@ function singleUserReducer(state = {}, action) {
   switch (action.type) {
     case SET_SINGLE_USER:
       return action.user;
+
+    default:
+      return state;
+  }
+}
+
+/***/ }),
+
+/***/ "./client/store/users.js":
+/*!*******************************!*\
+  !*** ./client/store/users.js ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "addUser": () => (/* binding */ addUser),
+/* harmony export */   "default": () => (/* binding */ userListReducer),
+/* harmony export */   "deleteUser": () => (/* binding */ deleteUser),
+/* harmony export */   "fetchUser": () => (/* binding */ fetchUser),
+/* harmony export */   "setUser": () => (/* binding */ setUser),
+/* harmony export */   "toAddUser": () => (/* binding */ toAddUser),
+/* harmony export */   "toDeleteUser": () => (/* binding */ toDeleteUser)
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+ //Action types
+
+const SET_USERS = 'SET_USERS';
+const ADD_USER = 'ADD_USER';
+const DELETE_USER = 'DELETE_USER'; //Action creators
+
+const setUser = users => ({
+  type: SET_USERS,
+  users
+});
+const addUser = user => ({
+  type: ADD_USER,
+  user
+});
+const deleteUser = id => ({
+  type: DELETE_USER,
+  id
+}); // Thunk creators
+
+const fetchUser = () => async dispatch => {
+  const {
+    data
+  } = await axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/users');
+  dispatch(setUser(data));
+};
+const toAddUser = (userList, history) => async dispatch => {
+  await axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/users', userList);
+  dispatch(addUser(userList));
+  history.push('/users');
+};
+const toDeleteUser = (id, history) => async dispatch => {
+  await axios__WEBPACK_IMPORTED_MODULE_0___default()["delete"](`/api/users/${id}`).then(() => dispatch(deleteUser(id)));
+  history.push('/users');
+}; //Reducer
+
+function userListReducer(state = [], action) {
+  switch (action.type) {
+    case SET_USERS:
+      return action.users;
+
+    case ADD_USER:
+      return [...state, action.user];
+
+    case DELETE_USER:
+      return [...state].filter(userState => userState.id !== action.id);
 
     default:
       return state;
