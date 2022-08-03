@@ -21,11 +21,7 @@ const User = db.define('user', {
     type: sequelize.BOOLEAN,
     defaultValue: false,
   },
-  // loggedIn: {
-  //   type: Sequelize.ENUM('USER', 'ADMIN'),
-  //   allowNull: false,
-  //   defaultValue: 'USER',
-  // },
+
   admin: {
     type: Sequelize.BOOLEAN,
     defaultValue: false,
