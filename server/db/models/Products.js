@@ -28,14 +28,14 @@ const Product = db.define('product', {
   },
   esrb: {
     type: Sequelize.STRING,
-    allowNull: false,
+    defaultValue: 'Not rated',
   },
   rating: {
     type: Sequelize.INTEGER,
     allowNull: false,
   },
-  players: {
-    type: Sequelize.INTEGER,
+  multiplayer: {
+    type: Sequelize.STRING,
     allowNull: false,
   },
 });

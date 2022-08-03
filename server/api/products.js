@@ -13,6 +13,7 @@ router.get('/', async (req, res, next) => {
   }
 });
 router.get('/:id', async (req, res, next) => {
+  //productid
   try {
     let productid = req.params.id;
     let singleProduct = await Product.findByPk(productid);
