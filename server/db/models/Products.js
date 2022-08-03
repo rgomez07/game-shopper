@@ -26,6 +26,7 @@ const Product = db.define('product', {
     type: Sequelize.TEXT,
     defaultValue: './images/Game_placeholder.png',
   },
+
   esrb: {
     type: Sequelize.STRING,
     defaultValue: 'Not rated',
