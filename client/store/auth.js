@@ -2,17 +2,14 @@ import axios from 'axios'
 import history from '../history'
 
 const TOKEN = 'token'
-
 /**
  * ACTION TYPES
  */
 const SET_AUTH = 'SET_AUTH'
-
 /**
  * ACTION CREATORS
  */
 const setAuth = auth => ({type: SET_AUTH, auth})
-
 /**
  * THUNK CREATORS
  */
@@ -46,7 +43,6 @@ export const logout = () => {
     auth: {}
   }
 }
-
 /**
  * REDUCER
  */
