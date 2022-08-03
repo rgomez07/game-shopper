@@ -20,6 +20,7 @@ async function seed() {
   ]);
 
   const product = await Promise.all([
+    //PRICE IS IN CENTS TO AVOID CALC ISSUES, FRONTEND WILL DIVIDE BY 100 FOR DISPLAY
     Product.create({
       name: "Tunic",
       description:
@@ -96,12 +97,12 @@ async function seed() {
       multiplayer: "No",
     }),
     Product.create({
-      //working on this
       name: "NieR Replicant v1.22474487139...",
       description: `The upgraded prequel of NieR:Automata. A kind young man sets out with Grimoire Weiss, a strange talking book, to search for the "Sealed verses" in order to save his sister Yonah, who fell terminally ill to the Black Scrawl.`,
-      platform: "PC, PlayStation 5, PlayStation 4, Xbox Series S/X",
+      platform: "PC, PlayStation 4, Xbox One",
       genre: "Adventure, Action",
       price: 5999,
+      esrb: "Mature",
       image:
         "https://media.rawg.io/media/games/99e/99e937e4cc518d641317116c9d8d9046.jpg",
       rating: 85,
@@ -110,24 +111,28 @@ async function seed() {
     Product.create({
       name: "Black Book",
       description:
-        "Inscryption is an inky black card-based odyssey that blends the deckbuilding roguelike, escape-room style puzzles, and psychological horror into a blood-laced smoothie. Darker still are the secrets inscrybed upon the cards...",
-      platform: "PC, PlayStation 5, PlayStation 4, Xbox Series S/X",
-      genre: "Adventure, Indie, Strategy",
-      price: 19.99,
+        "“Black Book” is a dark RPG Adventure, based on Slavic myths, in which you play as a young sorceress. Fight evil forces in card-based battles and explore the world, where humans live alongside mythological creatures.",
+      platform:
+        "PC, PlayStation 5, PlayStation 4, Xbox One, Xbox Series S/X, Nintendo Switch",
+      genre: "Indie, Strategy",
+      price: 2499,
+      esrb: "Everyone 10+",
       image:
-        "https://media.rawg.io/media/games/99e/99e937e4cc518d641317116c9d8d9046.jpg",
-      rating: 85,
+        "https://media.rawg.io/media/games/1d6/1d6f294a27ff1b90d4a4a79d42d3f7b2.jpg",
+      rating: 78,
       multiplayer: "No",
     }),
     Product.create({
+      //working here
       name: "Biomutant",
       description:
         "Inscryption is an inky black card-based odyssey that blends the deckbuilding roguelike, escape-room style puzzles, and psychological horror into a blood-laced smoothie. Darker still are the secrets inscrybed upon the cards...",
-      platform: "PC, PlayStation 5, PlayStation 4, Xbox Series S/X",
+      platform: "PC, PlayStation 4, Xbox One",
       genre: "Adventure, Indie, Strategy",
-      price: 19.99,
+      price: 1999,
+      esrb: "Teen",
       image:
-        "https://media.rawg.io/media/games/99e/99e937e4cc518d641317116c9d8d9046.jpg",
+        "https://media.rawg.io/media/games/363/363830e5f6459ca71eb43bea8c32f688.jpg",
       rating: 85,
       multiplayer: "No",
     }),
@@ -137,7 +142,7 @@ async function seed() {
         "Inscryption is an inky black card-based odyssey that blends the deckbuilding roguelike, escape-room style puzzles, and psychological horror into a blood-laced smoothie. Darker still are the secrets inscrybed upon the cards...",
       platform: "PC, PlayStation 5, PlayStation 4, Xbox Series S/X",
       genre: "Adventure, Indie, Strategy",
-      price: 19.99,
+      price: 1999,
       image:
         "https://media.rawg.io/media/games/99e/99e937e4cc518d641317116c9d8d9046.jpg",
       rating: 85,
@@ -149,7 +154,7 @@ async function seed() {
         "Inscryption is an inky black card-based odyssey that blends the deckbuilding roguelike, escape-room style puzzles, and psychological horror into a blood-laced smoothie. Darker still are the secrets inscrybed upon the cards...",
       platform: "PC, PlayStation 5, PlayStation 4, Xbox Series S/X",
       genre: "Adventure, Indie, Strategy",
-      price: 19.99,
+      price: 1999,
       image:
         "https://media.rawg.io/media/games/99e/99e937e4cc518d641317116c9d8d9046.jpg",
       rating: 85,
@@ -161,7 +166,7 @@ async function seed() {
         "Inscryption is an inky black card-based odyssey that blends the deckbuilding roguelike, escape-room style puzzles, and psychological horror into a blood-laced smoothie. Darker still are the secrets inscrybed upon the cards...",
       platform: "PC, PlayStation 5, PlayStation 4, Xbox Series S/X",
       genre: "Adventure, Indie, Strategy",
-      price: 19.99,
+      price: 1999,
       image:
         "https://media.rawg.io/media/games/99e/99e937e4cc518d641317116c9d8d9046.jpg",
       rating: 85,
@@ -173,7 +178,7 @@ async function seed() {
         "Inscryption is an inky black card-based odyssey that blends the deckbuilding roguelike, escape-room style puzzles, and psychological horror into a blood-laced smoothie. Darker still are the secrets inscrybed upon the cards...",
       platform: "PC, PlayStation 5, PlayStation 4, Xbox Series S/X",
       genre: "Adventure, Indie, Strategy",
-      price: 19.99,
+      price: 1999,
       image:
         "https://media.rawg.io/media/games/99e/99e937e4cc518d641317116c9d8d9046.jpg",
       rating: 85,
@@ -185,7 +190,7 @@ async function seed() {
         "Inscryption is an inky black card-based odyssey that blends the deckbuilding roguelike, escape-room style puzzles, and psychological horror into a blood-laced smoothie. Darker still are the secrets inscrybed upon the cards...",
       platform: "PC, PlayStation 5, PlayStation 4, Xbox Series S/X",
       genre: "Adventure, Indie, Strategy",
-      price: 19.99,
+      price: 1999,
       image:
         "https://media.rawg.io/media/games/99e/99e937e4cc518d641317116c9d8d9046.jpg",
       rating: 85,
@@ -197,7 +202,7 @@ async function seed() {
         "Inscryption is an inky black card-based odyssey that blends the deckbuilding roguelike, escape-room style puzzles, and psychological horror into a blood-laced smoothie. Darker still are the secrets inscrybed upon the cards...",
       platform: "PC, PlayStation 5, PlayStation 4, Xbox Series S/X",
       genre: "Adventure, Indie, Strategy",
-      price: 19.99,
+      price: 1999,
       image:
         "https://media.rawg.io/media/games/99e/99e937e4cc518d641317116c9d8d9046.jpg",
       rating: 85,
@@ -209,7 +214,7 @@ async function seed() {
         "Inscryption is an inky black card-based odyssey that blends the deckbuilding roguelike, escape-room style puzzles, and psychological horror into a blood-laced smoothie. Darker still are the secrets inscrybed upon the cards...",
       platform: "PC, PlayStation 5, PlayStation 4, Xbox Series S/X",
       genre: "Adventure, Indie, Strategy",
-      price: 19.99,
+      price: 1999,
       image:
         "https://media.rawg.io/media/games/99e/99e937e4cc518d641317116c9d8d9046.jpg",
       rating: 85,
@@ -221,7 +226,7 @@ async function seed() {
         "Inscryption is an inky black card-based odyssey that blends the deckbuilding roguelike, escape-room style puzzles, and psychological horror into a blood-laced smoothie. Darker still are the secrets inscrybed upon the cards...",
       platform: "PC, PlayStation 5, PlayStation 4, Xbox Series S/X",
       genre: "Adventure, Indie, Strategy",
-      price: 19.99,
+      price: 1999,
       image:
         "https://media.rawg.io/media/games/99e/99e937e4cc518d641317116c9d8d9046.jpg",
       rating: 85,
@@ -233,7 +238,7 @@ async function seed() {
         "Inscryption is an inky black card-based odyssey that blends the deckbuilding roguelike, escape-room style puzzles, and psychological horror into a blood-laced smoothie. Darker still are the secrets inscrybed upon the cards...",
       platform: "PC, PlayStation 5, PlayStation 4, Xbox Series S/X",
       genre: "Adventure, Indie, Strategy",
-      price: 19.99,
+      price: 1999,
       image:
         "https://media.rawg.io/media/games/99e/99e937e4cc518d641317116c9d8d9046.jpg",
       rating: 85,
@@ -245,7 +250,7 @@ async function seed() {
         "Inscryption is an inky black card-based odyssey that blends the deckbuilding roguelike, escape-room style puzzles, and psychological horror into a blood-laced smoothie. Darker still are the secrets inscrybed upon the cards...",
       platform: "PC, PlayStation 5, PlayStation 4, Xbox Series S/X",
       genre: "Adventure, Indie, Strategy",
-      price: 19.99,
+      price: 1999,
       image:
         "https://media.rawg.io/media/games/99e/99e937e4cc518d641317116c9d8d9046.jpg",
       rating: 85,
@@ -257,7 +262,7 @@ async function seed() {
         "Inscryption is an inky black card-based odyssey that blends the deckbuilding roguelike, escape-room style puzzles, and psychological horror into a blood-laced smoothie. Darker still are the secrets inscrybed upon the cards...",
       platform: "PC, PlayStation 5, PlayStation 4, Xbox Series S/X",
       genre: "Adventure, Indie, Strategy",
-      price: 19.99,
+      price: 1999,
       image:
         "https://media.rawg.io/media/games/99e/99e937e4cc518d641317116c9d8d9046.jpg",
       rating: 85,
