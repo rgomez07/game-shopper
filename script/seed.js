@@ -272,12 +272,14 @@ async function seed() {
 
   const order = await Order.create({ status: "open" });
 
+  // const order_product = await Promise.all([Order_Products.create()]);
+
   const user = await User.findByPk(1);
   await order.setUser(user);
   const product1 = await Product.findByPk(1);
   const product2 = await Product.findByPk(2);
   await order.addProduct(product1);
-  await order.addProduct(product2);
+
 
   console.log(`seeded ${users.length} users`);
   console.log(`seeded successfully`);
@@ -309,7 +311,7 @@ async function seed() {
       product20: product[19],
     },
     // order_product1: order_product[0],
-    // order1: order[0],
+    order1: order[0],
   };
 }
 

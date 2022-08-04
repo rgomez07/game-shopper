@@ -6,7 +6,10 @@ module.exports = router;
 
 router.get("/:id", async (req, res, next) => {
   try {
-    const userCart = await User.findByPk(req.params.id, {
+    const userCart = await User.findOne({
+      where: {
+        id: req.params.id,
+      },
       include: [
         {
           // join it with corresponding open order
@@ -15,11 +18,7 @@ router.get("/:id", async (req, res, next) => {
             status: "open",
           },
           // join it with corresponding product(s)
-          include: [
-            {
-              model: Product,
-            },
-          ],
+          include: [Product],
         },
       ],
     });
