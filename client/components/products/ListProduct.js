@@ -5,10 +5,12 @@ class ListProduct extends React.Component {
   render() {
     const { products } = this.props;
     return (
-      <div>
+      <div className='list-product'>
+        <body>
         <img src={products.image} />
         <h3>{products.name}</h3>
-        <body>
+        <h4>${products.price/100}</h4>
+
           <h4 id="description">Description</h4>
           <div>{products.description}</div>
         </body>

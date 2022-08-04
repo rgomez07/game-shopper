@@ -24,3 +24,10 @@ img {
   width: 200px;
   height: 200px
 }
+
+.list-product {
+  flex: 1;
+  width: 100%;
+  flex-wrap: wrap;
+  border: 1px;
+}
