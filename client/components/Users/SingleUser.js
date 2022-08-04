@@ -4,25 +4,26 @@ import { Link } from 'react-router-dom';
 import { fetchSingleUser } from '../../store/singleUser';
 
 class SingeUser extends React.Component {
-    constructor() {
-        super();
-    }
+  constructor() {
+    super();
+  }
 
-    componentDidMount() {
-        this.props.fetchSingleUser(this.props.match.params.id);
-    }
+  componentDidMount() {
+    this.props.fetchSingleUser(this.props.match.params.id);
+  }
 
-    render() {
-        const {admin} = this.props.singleUser;
-        return (
-            <div>
-                <h1>{this.props.singleUser.username}</h1>
-                <br />
-                <h2>{admin}</h2>
-                {console.log(this.props.singleUser)}
-            </div>
-        )
-    }
+  render() {
+    const { admin } = this.props.singleUser;
+    return (
+      <div>
+        <h1>Name: {this.props.singleUser.username}</h1>
+        <h3>User Type: {this.props.singleUser.userType}</h3>
+        <br />
+        <h2>{this.props.singleUser.email}</h2>
+        {console.log(this.props.singleUser)}
+      </div>
+    );
+  }
 }
 
 const mapState = (state) => ({ singleUser: state.singleUserReducer });
