@@ -27,16 +27,6 @@ router.get('/:id', async (req, res, next) => {
     next(err);
   }
 });
-//Deletes a single user based off of ID
-router.delete('/:id', async (req, res, next) => {
-  try {
-    const deleteUser = await User.findByPk(req.params.id);
-    await deleteUser.destroy();
-    res.send(deleteUser);
-  } catch (err) {
-    next(err);
-  }
-});
 
 //Put Routes
 
