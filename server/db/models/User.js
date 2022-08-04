@@ -30,6 +30,7 @@ const User = db.define('user', {
     type: sequelize.BOOLEAN,
     defaultValue: false,
   },
+
   //This is a test, trying enum for now
   // admin: {
   //   type: Sequelize.BOOLEAN,
