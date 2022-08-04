@@ -59,33 +59,3 @@ const mapDispatch = (dispatch) => {
 };
 
 export default connect(mapState, mapDispatch)(SingleProduct);
-
-// platform: {
-//   type: Sequelize.STRING,
-//   allowNull: false,
-// },
-// genre: {
-//   type: Sequelize.STRING,
-//   allowNull: false,
-// },
-// price: {
-//   type: Sequelize.INTEGER,
-//   allowNull: false,
-// },
-// image: {
-//   type: Sequelize.TEXT,
-//   defaultValue: './images/Game_placeholder.png',
-// },
-
-// esrb: {
-//   type: Sequelize.STRING,
-//   defaultValue: 'Not rated',
-// },
-// rating: {
-//   type: Sequelize.INTEGER,
-//   allowNull: false,
-// },
-// multiplayer: {
-//   type: Sequelize.STRING,
-//   allowNull: false,
-// },
