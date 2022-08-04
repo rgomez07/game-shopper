@@ -21,5 +21,6 @@ module.exports = {
     User,
     Order,
     Product,
+    Order_Products,
   },
 };

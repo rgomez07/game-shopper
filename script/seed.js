@@ -2,7 +2,7 @@
 
 const {
   db,
-  models: { User, Product },
+  models: { User, Product, Order, Order_Products },
 } = require("../server/db");
 
 /**
@@ -270,6 +270,15 @@ async function seed() {
     }),
   ]);
 
+  const order = await Order.create({ status: "open" });
+
+  const user = await User.findByPk(1);
+  await order.setUser(user);
+  const product1 = await Product.findByPk(1);
+  const product2 = await Product.findByPk(2);
+  await order.addProduct(product1);
+  await order.addProduct(product2);
+
   console.log(`seeded ${users.length} users`);
   console.log(`seeded successfully`);
   return {
@@ -299,6 +308,8 @@ async function seed() {
       product19: product[18],
       product20: product[19],
     },
+    // order_product1: order_product[0],
+    // order1: order[0],
   };
 }
 
