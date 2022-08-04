@@ -1,6 +1,8 @@
-const router = require('express').Router()
-const { models: { User }} = require('../db')
-module.exports = router
+const router = require('express').Router();
+const {
+  models: { User },
+} = require('../db');
+module.exports = router;
 
 router.get('/', async (req, res, next) => {
   try {
@@ -8,23 +10,35 @@ router.get('/', async (req, res, next) => {
       // explicitly select only the id and username fields - even though
       // users' passwords are encrypted, it won't help if we just
       // send everything to anyone who asks!
-      attributes: ['id', 'username']
-    })
-    res.json(users)
+      attributes: ['id', 'username'],
+    });
+    res.json(users);
   } catch (err) {
-    next(err)
+    next(err);
   }
-})
+});
 //Gets a single user by ID
 router.get('/:id', async (req, res, next) => {
   try {
-    const singleUser = await User.findByPk(req.params.id)
-     
+    const singleUser = await User.findByPk(req.params.id);
+
     res.send(singleUser);
   } catch (err) {
     next(err);
   }
 });
+
+//Put Routes
+
+router.put('/:id', async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.params.id);
+    res.send(await user.update(req.body));
+  } catch (error) {
+    next(error);
+  }
+});
+
 //Deletes a single user based off of ID
 router.delete('/:id', async (req, res, next) => {
   try {
