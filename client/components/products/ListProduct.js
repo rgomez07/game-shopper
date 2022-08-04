@@ -5,16 +5,20 @@ class ListProduct extends React.Component {
   render() {
     const { products } = this.props;
     return (
-      <div>
-        <img src={products.image} />
-        <h3>{products.name}</h3>
+      <div className="list-product">
         <body>
+          <Link to={`/products/${products.id}`}>
+            <img src={products.image} />
+            <h3>{products.name}</h3>
+          </Link>
+          <h4>${products.price / 100}</h4>
           <h4 id="description">Description</h4>
           <div>{products.description}</div>
         </body>
-        <br/>
-        <hr/>
-        <br/>
+
+        <br />
+        <hr />
+        <br />
       </div>
     );
   }
