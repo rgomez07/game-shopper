@@ -17,14 +17,28 @@ const User = db.define('user', {
     type: Sequelize.STRING,
     allowNull: true,
   },
+  email: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      isEmail: true,
+    },
+
+    unique: true,
+  },
   logged: {
     type: sequelize.BOOLEAN,
     defaultValue: false,
   },
-
-  admin: {
-    type: Sequelize.BOOLEAN,
-    defaultValue: false,
+  //This is a test, trying enum for now
+  // admin: {
+  //   type: Sequelize.BOOLEAN,
+  //   defaultValue: false,
+  // },
+  userType: {
+    type: Sequelize.ENUM('User', 'Admin'),
+    allowNull: true,
+    defaultValue: 'User',
   },
 });
 
