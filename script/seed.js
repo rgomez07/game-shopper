@@ -297,6 +297,7 @@ async function seed() {
   const product1 = await Product.findByPk(1);
   const product2 = await Product.findByPk(2);
   await order.addProduct(product1);
+  await order.addProduct(product2);
 
   console.log(`seeded ${users.length} users`);
   console.log(`seeded successfully`);
