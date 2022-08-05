@@ -7,7 +7,7 @@
     "build": "webpack",
     "build:dev": "npm run build -- --watch --mode=development",
     "seed": "node script/seed.js",
-    "start": "node server",
+    "start": "node server/index.js",
     "start:dev": "npm run build:dev & npm run start-server",
     "start:dev:logger": "LOGGING=true npm run start:dev",
     "start:dev:seed": "SEED=true npm run start:dev",
@@ -29,6 +29,7 @@
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.9.1",
     "pg": "^8.5.1",
+    "pg-hstore": "^2.3.4",
     "sequelize": "^6.3.5"
   },
   "devDependencies": {
@@ -57,5 +58,8 @@
     "supertest": "^4.0.2",
     "webpack": "^5.15.0",
     "webpack-cli": "^4.3.1"
+  },
+  "engines": {
+    "node": "16.4"
   }
 }

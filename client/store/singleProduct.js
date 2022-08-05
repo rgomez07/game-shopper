@@ -17,7 +17,7 @@ export const deleteProduct = (id) => ({
 
 //Thunk creators
 export const fetchSingleProduct = (id) => async (dispatch) => {
-  const { data } = await axios.get(`/api/product/${id}`);
+  const { data } = await axios.get(`/api/products/${id}`);
   dispatch(setSingleProduct(data));
 };
 export const toDeleteProduct = (id, history) => async (dispatch) => {
