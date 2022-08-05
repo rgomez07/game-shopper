@@ -2,6 +2,7 @@ const router = require("express").Router();
 const {
   models: { Product, User, Order },
 } = require("../db");
+const Order_Products = require("../db/models/OrderProduct");
 module.exports = router;
 
 //get cart
@@ -37,9 +38,6 @@ router.get("/:id", async (req, res, next) => {
 
 //add to cart
 router.put("/:id", async (req, res, next) => {
-  const { userId, productId } = req.body;
-  console.log("shfiaohguqeg>>>>>>>>", req.body);
-
   try {
     const userCart = await User.findOne({
       where: {
@@ -58,22 +56,32 @@ router.put("/:id", async (req, res, next) => {
       ],
     });
 
-    let productList = userCart.orders[0].products;
-    //hardcoded 0 for testing
-    // let orderProducts = userCart.orders[0].order_product;
-    let productQuant = productList[0].order_product;
-    console.log("cart", userCart);
-    if (userCart) {
-      //find index of user
+    // let productList = userCart.orders[0].products;
+    // //hardcoded 0 for testing
+    // // let orderProducts = userCart.orders[0].order_product;
 
-      //we have an add to cart that can only increment by one
-      await userCart.update({ productQuant: productQuant.quantity++ });
+    // console.log("newest cart", userCart.orders);
+    // if (userCart.orders.length) {
+    //   //find index of user
 
-      // productList.push({ id: req.body.id, price: req.body.price });
-      console.log("after increment", productList[0].order_product.quantity);
-    } else {
-      await Order.create({ status: "open" });
-    }
+    //   //we have an add to cart that can only increment by one
+    //   const [orderProducts] = await Order_Products.findAll({
+    //     where: {
+    //       orderId: req.body.orderId,
+    //       productId: req.body.productId,
+    //     },
+    //   });
+    //   console.log("before", orderProducts);
+    //   let increment = orderProducts.dataValues.quantity + 1;
+    //   await orderProducts.update({ quantity: increment });
+    //   console.log("this one", orderProducts.dataValues);
+
+    //   // productList.push({ id: req.body.id, price: req.body.price });
+    //   console.log("after increment", orderProducts.dataValues.quantity);
+    // }
+
+    // if (!userCart) {
+    await Order.create({ status: "open" });
 
     // if (userCart.orders.length) {
     //   orderInCart = userCart.orders[0];
@@ -99,8 +107,6 @@ router.put("/:id", async (req, res, next) => {
     //   // remainder of code goes here
 
     res.send(req.body);
-
-    //parent.addChild()
   } catch (error) {
     next(error);
   }
