@@ -1,12 +1,12 @@
-import React from "react";
-import { fetchSingleProduct } from "../../store/singleProduct";
-import { connect } from "react-redux";
-import NotFound from "../NotFound";
+import React from 'react';
+import { fetchSingleProduct } from '../../store/singleProduct';
+import { connect } from 'react-redux';
+import NotFound from '../NotFound';
 
 class SingleProduct extends React.Component {
   componentDidMount() {
     this.props.fetchSingleProduct(this.props.match.params.id);
-    console.log("this is this.props", this.props);
+    console.log('this is this.props', this.props);
   }
 
   render() {
@@ -14,7 +14,7 @@ class SingleProduct extends React.Component {
     return (
       <div>
         {product.name ? (
-          <div>
+          <div className="textColor">
             <h2>{product.name}</h2>
             <img src={product.image} />
             <h3>${product.price / 100}</h3>
