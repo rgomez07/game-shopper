@@ -85,7 +85,7 @@ router.put("/:userId", async (req, res, next) => {
       const order = await Order.create({ status: "open" });
       // order needs to be associated with user
       const user = await User.findByPk(req.params.userId);
-      // add this newly opened order to a user
+      // add this newly opened order to the appropriate user
       await order.setUser(user);
 
       await Order_Products.create({
@@ -101,45 +101,5 @@ router.put("/:userId", async (req, res, next) => {
     res.send(productList);
   } catch (error) {
     next(error);
-  }
-});
-
-router.delete("/:userId/:productId", async (req, res, next) => {
-  try {
-    const user = await User.findOne({
-      where: {
-        id: req.params.userId,
-      },
-      include: [
-        {
-          // join it with corresponding open order
-          model: Order,
-          where: {
-            status: "open",
-          },
-        },
-      ],
-    });
-    if (!user) {
-      res.sendStatus(404);
-    } else {
-      // if user exists - if statement, else - send status 404
-      const deletedProduct = await Order_Products.findOne({
-        // using findOne to be sure we're only deleting one product
-        where: {
-          productId: req.params.productId,
-          orderId: user.orders[0].id,
-        },
-      });
-
-      if (!deletedProduct) {
-        res.sendStatus(404);
-      } else {
-        await deletedProduct.destroy();
-        res.send(deletedProduct);
-      }
-    }
-  } catch (err) {
-    next(err);
   }
 });
