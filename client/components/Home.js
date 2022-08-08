@@ -11,7 +11,7 @@ export const Home = (props) => {
   return (
     <>
       <div>
-        <h2 className="textColor">Welcome, {username}</h2>
+        <h2 className='textColor'>Welcome, {username}</h2>
       </div>
       <AllProducts />
     </>
