@@ -2149,6 +2149,10 @@ class Routes extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       exact: true,
       path: "/products/:id",
       component: _components_singleProducts_SingleProduct__WEBPACK_IMPORTED_MODULE_4__["default"]
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
+      exact: true,
+      path: "/cart",
+      component: _components_Cart__WEBPACK_IMPORTED_MODULE_5__["default"]
     })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
       path: "/",
       exact: true,
@@ -2163,6 +2167,10 @@ class Routes extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       exact: true,
       path: "/products:id",
       component: _components_singleProducts_SingleProduct__WEBPACK_IMPORTED_MODULE_4__["default"]
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
+      exact: true,
+      path: "/cart",
+      component: _components_Cart__WEBPACK_IMPORTED_MODULE_5__["default"]
     })));
   }
 
@@ -2199,9 +2207,70 @@ const mapDispatch = dispatch => {
 /*!***********************************!*\
   !*** ./client/components/Cart.js ***!
   \***********************************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /Users/rigo/Documents/SeniorPhase/game-shopper/client/components/Cart.js: Unexpected token (44:18)\n\n\u001b[0m \u001b[90m 42 |\u001b[39m                     key\u001b[33m=\u001b[39m {prod\u001b[33m.\u001b[39mid}\u001b[0m\n\u001b[0m \u001b[90m 43 |\u001b[39m                     product\u001b[33m=\u001b[39m{prod}\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 44 |\u001b[39m                   )\u001b[0m\n\u001b[0m \u001b[90m    |\u001b[39m                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 45 |\u001b[39m                   })}\u001b[0m\n\u001b[0m \u001b[90m 46 |\u001b[39m               \u001b[33m<\u001b[39m\u001b[33m/\u001b[39m\u001b[33mdiv\u001b[39m\u001b[33m>\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 47 |\u001b[39m             ) \u001b[33m:\u001b[39m (\u001b[0m\n    at instantiate (/Users/rigo/Documents/SeniorPhase/game-shopper/node_modules/@babel/parser/lib/index.js:72:32)\n    at constructor (/Users/rigo/Documents/SeniorPhase/game-shopper/node_modules/@babel/parser/lib/index.js:366:12)\n    at Object.raise (/Users/rigo/Documents/SeniorPhase/game-shopper/node_modules/@babel/parser/lib/index.js:3453:19)\n    at Object.unexpected (/Users/rigo/Documents/SeniorPhase/game-shopper/node_modules/@babel/parser/lib/index.js:3491:16)\n    at Object.jsxParseIdentifier (/Users/rigo/Documents/SeniorPhase/game-shopper/node_modules/@babel/parser/lib/index.js:7918:12)\n    at Object.jsxParseNamespacedName (/Users/rigo/Documents/SeniorPhase/game-shopper/node_modules/@babel/parser/lib/index.js:7928:23)\n    at Object.jsxParseAttribute (/Users/rigo/Documents/SeniorPhase/game-shopper/node_modules/@babel/parser/lib/index.js:8026:22)\n    at Object.jsxParseOpeningElementAfterName (/Users/rigo/Documents/SeniorPhase/game-shopper/node_modules/@babel/parser/lib/index.js:8046:28)\n    at Object.jsxParseOpeningElementAt (/Users/rigo/Documents/SeniorPhase/game-shopper/node_modules/@babel/parser/lib/index.js:8039:17)\n    at Object.jsxParseElementAt (/Users/rigo/Documents/SeniorPhase/game-shopper/node_modules/@babel/parser/lib/index.js:8070:33)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DisplayCart": () => (/* binding */ DisplayCart),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   "fakeData": () => (/* binding */ fakeData)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _store_cart__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/cart */ "./client/store/cart.js");
+
+
+
+const fakeData = [{
+  name: 'COD',
+  price: '200',
+  image: 'https://media.rawg.io/media/games/2c1/2c1984e128ac48b89953ed4de4904a3b.jpg',
+  id: 1
+}, {
+  name: 'game',
+  price: '100',
+  image: 'https://media.rawg.io/media/games/99e/99e937e4cc518d641317116c9d8d9046.jpg',
+  id: 2
+}];
+class DisplayCart extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
+  componentDidMount() {
+    this.props.fetchCart(this.props.match.params.id);
+    console.log('heeerrree----', this.props.cart);
+  }
+
+  render() {
+    console.log('heeerrree----', this.props.cart);
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "textColor"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      id: "products",
+      className: "list"
+    }, fakeData.length ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Your Cart"), fakeData.map(product => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      key: product.id
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+      className: "",
+      src: product.image
+    }), product.name))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", {
+      className: "textColor"
+    }, "Your Cart is empty")));
+  }
+
+}
+
+const mapState = state => {
+  return {
+    cart: state.cartReducer
+  };
+};
+
+const mapDispatch = dispatch => {
+  return {
+    fetchCart: id => dispatch((0,_store_cart__WEBPACK_IMPORTED_MODULE_2__.fetchCart)(id))
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapState, mapDispatch)(DisplayCart));
 
 /***/ }),
 
@@ -2900,6 +2969,75 @@ const logout = () => {
 
 /***/ }),
 
+/***/ "./client/store/cart.js":
+/*!******************************!*\
+  !*** ./client/store/cart.js ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ cartReducer),
+/* harmony export */   "deleteCartItem": () => (/* binding */ deleteCartItem),
+/* harmony export */   "deleteCartProduct": () => (/* binding */ deleteCartProduct),
+/* harmony export */   "fetchCart": () => (/* binding */ fetchCart),
+/* harmony export */   "getCart": () => (/* binding */ getCart)
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+ // action type
+
+const DELETE_PRODUCT = 'DELETE_PRODUCT';
+const GET_CART = 'GET_CART'; // action creator(s)
+
+const deleteCartProduct = product => ({
+  type: DELETE_PRODUCT,
+  product
+});
+const getCart = cart => {
+  return {
+    type: GET_CART,
+    cart
+  };
+}; // thunks
+
+const deleteCartItem = (productId, history) => {
+  return async dispatch => {
+    try {
+      const {
+        data: cartItem
+      } = await axios__WEBPACK_IMPORTED_MODULE_0___default()["delete"](`/api/cart/${productId}`);
+      dispatch(_deleteStudent(cartItem));
+    } catch (err) {
+      console.log('error deleting item from cart', err);
+    }
+  };
+};
+const fetchCart = id => async dispatch => {
+  const {
+    data
+  } = await axios__WEBPACK_IMPORTED_MODULE_0___default().get(`/api/cart/${id}`);
+  dispatch(getCart(data));
+}; //Reducer
+
+function cartReducer(state = {}, action) {
+  switch (action.type) {
+    case DELETE_PRODUCT:
+      return state.filter(cartProduct => {
+        return cartProduct.id !== action.product.id;
+      });
+
+    case GET_CART:
+      return action.cart;
+
+    default:
+      return state;
+  }
+}
+
+/***/ }),
+
 /***/ "./client/store/index.js":
 /*!*******************************!*\
   !*** ./client/store/index.js ***!
@@ -2914,16 +3052,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "logout": () => (/* reexport safe */ _auth__WEBPACK_IMPORTED_MODULE_2__.logout),
 /* harmony export */   "me": () => (/* reexport safe */ _auth__WEBPACK_IMPORTED_MODULE_2__.me)
 /* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux-logger */ "./node_modules/redux-logger/dist/redux-logger.js");
 /* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux_logger__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! redux-thunk */ "./node_modules/redux-thunk/es/index.js");
+/* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! redux-thunk */ "./node_modules/redux-thunk/es/index.js");
 /* harmony import */ var redux_devtools_extension__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-devtools-extension */ "./node_modules/redux-devtools-extension/index.js");
 /* harmony import */ var _auth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./auth */ "./client/store/auth.js");
 /* harmony import */ var _singleProduct__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./singleProduct */ "./client/store/singleProduct.js");
 /* harmony import */ var _singleUser__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./singleUser */ "./client/store/singleUser.js");
 /* harmony import */ var _users__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./users */ "./client/store/users.js");
 /* harmony import */ var _products__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./products */ "./client/store/products.js");
+/* harmony import */ var _cart__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./cart */ "./client/store/cart.js");
 
 
 
@@ -2933,17 +3072,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const reducer = (0,redux__WEBPACK_IMPORTED_MODULE_7__.combineReducers)({
+
+const reducer = (0,redux__WEBPACK_IMPORTED_MODULE_8__.combineReducers)({
   auth: _auth__WEBPACK_IMPORTED_MODULE_2__["default"],
   singleProductReducer: _singleProduct__WEBPACK_IMPORTED_MODULE_3__["default"],
   singleUserReducer: _singleUser__WEBPACK_IMPORTED_MODULE_4__["default"],
   userListReducer: _users__WEBPACK_IMPORTED_MODULE_5__["default"],
-  productsReducer: _products__WEBPACK_IMPORTED_MODULE_6__["default"]
+  productsReducer: _products__WEBPACK_IMPORTED_MODULE_6__["default"],
+  cartReducer: _cart__WEBPACK_IMPORTED_MODULE_7__["default"]
 });
-const middleware = (0,redux_devtools_extension__WEBPACK_IMPORTED_MODULE_1__.composeWithDevTools)((0,redux__WEBPACK_IMPORTED_MODULE_7__.applyMiddleware)(redux_thunk__WEBPACK_IMPORTED_MODULE_8__["default"], (0,redux_logger__WEBPACK_IMPORTED_MODULE_0__.createLogger)({
+const middleware = (0,redux_devtools_extension__WEBPACK_IMPORTED_MODULE_1__.composeWithDevTools)((0,redux__WEBPACK_IMPORTED_MODULE_8__.applyMiddleware)(redux_thunk__WEBPACK_IMPORTED_MODULE_9__["default"], (0,redux_logger__WEBPACK_IMPORTED_MODULE_0__.createLogger)({
   collapsed: true
 })));
-const store = (0,redux__WEBPACK_IMPORTED_MODULE_7__.createStore)(reducer, middleware);
+const store = (0,redux__WEBPACK_IMPORTED_MODULE_8__.createStore)(reducer, middleware);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (store);
 
 

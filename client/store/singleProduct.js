@@ -27,6 +27,8 @@ export const toDeleteProduct = (id, history) => async (dispatch) => {
     history.push('/products');
   };
 
+
+
 //Reducer
 export default function singleProductReducer(state = {}, action) {
     switch (action.type) {
