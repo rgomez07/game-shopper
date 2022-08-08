@@ -290,8 +290,6 @@ async function seed() {
 
   const order = await Order.create({ status: "open" });
 
-  // const order_product = await Promise.all([Order_Products.create()]);
-
   const user = await User.findByPk(1);
   await order.setUser(user);
   const product1 = await Product.findByPk(1);

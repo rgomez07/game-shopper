@@ -55,58 +55,39 @@ router.put("/:id", async (req, res, next) => {
         },
       ],
     });
+    if (userCart.orders.length) {
+      const productInCart = await Order_Products.findOne({
+        where: {
+          orderId: req.body.id,
+        },
+      });
 
-    // let productList = userCart.orders[0].products;
-    // //hardcoded 0 for testing
-    // // let orderProducts = userCart.orders[0].order_product;
+      //if product in cart, add quantity to existing quantity
+      if (productInCart) {
+        let newQuant = productInCart.dataValues.quantity + req.body.quantity;
+        await productInCart.update({ quantity: newQuant });
+      } else {
+        //if product isn't in cart, add new product to cart
+        await Order_Products.create({
+          quantity: req.body.quantity,
+          unit_price: req.body.unit_price,
+          productId: req.body.productId,
+          orderId: req.body.orderId,
+        });
+      }
+    } else {
+      // no order, so we need to create one and add product to the order
+      await Order.create({ status: "open" });
+      await Order_Products.create({
+        quantity: req.body.quantity,
+        unit_price: req.body.unit_price,
+        productId: req.body.productId,
+        orderId: req.body.orderId,
+      });
+    }
 
-    // console.log("newest cart", userCart.orders);
-    // if (userCart.orders.length) {
-    //   //find index of user
-
-    //   //we have an add to cart that can only increment by one
-    //   const [orderProducts] = await Order_Products.findAll({
-    //     where: {
-    //       orderId: req.body.orderId,
-    //       productId: req.body.productId,
-    //     },
-    //   });
-    //   console.log("before", orderProducts);
-    //   let increment = orderProducts.dataValues.quantity + 1;
-    //   await orderProducts.update({ quantity: increment });
-    //   console.log("this one", orderProducts.dataValues);
-
-    //   // productList.push({ id: req.body.id, price: req.body.price });
-    //   console.log("after increment", orderProducts.dataValues.quantity);
-    // }
-
-    // if (!userCart) {
-    await Order.create({ status: "open" });
-
-    // if (userCart.orders.length) {
-    //   orderInCart = userCart.orders[0];
-    //   console.log("order in cart", orderInCart);
-    //   let productIndex = productList.indexOf(req.body.id);
-    //   console.log(
-    //     "unit pricessssssssss",
-    //     productIndex,
-    //     productList[productIndex]
-    //     // .order_product.unit_price
-    //   );
-
-    //   if (productIndex !== -1) {
-    //     userCart.orders[productIndex].quantity =
-    //       productList[productIndex].order_product.quantity + req.body.quantity;
-    //     productList[productIndex].order_product.unit_price = req.body.price;
-    //     productList[productIndex].total =
-    //       productList[productIndex].order_product.quantity * req.body.price;
-    //     productList[productIndex].subtotal = productList[productIndex]
-    //       .map((product) => product.total)
-    //       .reduce((accumulator, current) => accumulator + current);
-    //   }
-    //   // remainder of code goes here
-
-    res.send(req.body);
+    let productList = userCart.orders[0].products;
+    res.send(productList);
   } catch (error) {
     next(error);
   }
