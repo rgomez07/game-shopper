@@ -18,6 +18,8 @@ router.get("/", async (req, res, next) => {
     next(err);
   }
 });
+
+
 //Gets a single user by ID
 router.get("/:id", async (req, res, next) => {
   try {
@@ -29,7 +31,7 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-//Put Routes
+//Put Routesn /api/users/id
 router.put('/:id', async (req, res, next) => {
   try {
     const user = await User.findByPk(req.params.id);
