@@ -19,6 +19,9 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
           <Link to="/users" className="textColor">
             Users
           </Link>
+          <Link to={`/users/1/profile`} className="textColor">
+            Profile
+          </Link>
         </div>
       ) : (
         <div>
