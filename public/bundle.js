@@ -2329,54 +2329,73 @@ const mapDispatch = dispatch => {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Navbar": () => (/* binding */ Navbar),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store */ "./client/store/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _store_auth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/auth */ "./client/store/auth.js");
+Object(function webpackMissingModule() { var e = new Error("Cannot find module '../../store/users'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 
 
 
 
 
-const Navbar = ({
-  handleClick,
-  isLoggedIn
-}) => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
-  className: "pageTitle"
-}, "Game Shopper"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("nav", null, isLoggedIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
-  to: "/home",
-  className: "textColor"
-}, "Home"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-  href: "#",
-  onClick: handleClick,
-  className: "textColor"
-}, "Logout"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
-  to: "/users",
-  className: "textColor"
-}, "Users")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
-  to: "/login",
-  className: "textColor"
-}, "Login"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
-  to: "/signup",
-  className: "textColor"
-}, "Sign Up"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("hr", null));
+class Navbar extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
+  componentDidMount() {
+    this.props.current(), this.props.handleClick(), this.props.fetchUsers();
+  }
+
+  render() {
+    {
+      console.log('NAVBAR PROPS -->', this.props.userType);
+    }
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
+      className: "pageTitle"
+    }, "Game Shopper"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("nav", null, this.props.isLoggedIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
+      to: "/home",
+      className: "textColor"
+    }, "Home"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+      href: "#",
+      onClick: this.props.handleClick,
+      className: "textColor"
+    }, "Logout"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
+      to: "/users",
+      className: "textColor"
+    }, "Users")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
+      to: "/login",
+      className: "textColor"
+    }, "Login"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
+      to: "/signup",
+      className: "textColor"
+    }, "Sign Up"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("hr", null));
+  }
+
+}
 /**
  * CONTAINER
  */
 
-
 const mapState = state => {
   return {
-    isLoggedIn: !!state.auth.id
+    isLoggedIn: !!state.auth.id,
+    userType: state.auth
   };
 };
 
 const mapDispatch = dispatch => {
   return {
     handleClick() {
-      dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.logout)());
+      dispatch((0,_store_auth__WEBPACK_IMPORTED_MODULE_2__.logout)());
+    },
+
+    current() {
+      dispatch((0,_store_auth__WEBPACK_IMPORTED_MODULE_2__.me)());
+    },
+
+    fetchUser() {
+      dispatch(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../../store/users'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())());
     }
 
   };
@@ -2524,24 +2543,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _store_users__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../store/users */ "./client/store/users.js");
+/* harmony import */ var _store_auth__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../store/auth */ "./client/store/auth.js");
+
 
 
 
 
 class AllUsers extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   componentDidMount() {
-    this.props.fetchUsers();
+    this.props.fetchUsers(), this.props.current();
   }
 
   render() {
     {
-      console.log(this.props.users);
+      console.log('USERS PROP -->', this.props.me);
     }
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, this.props.users.map(user => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
       key: user.id
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
       to: `/users/${user.id}`,
       className: "userListTextColor"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), user.username))));
@@ -2551,12 +2572,14 @@ class AllUsers extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
 
 const mapState = state => {
   return {
-    users: state.userListReducer
+    users: state.userListReducer,
+    me: state.auth
   };
 };
 
 const mapDispatch = dispatch => ({
-  fetchUsers: () => dispatch((0,_store_users__WEBPACK_IMPORTED_MODULE_2__.fetchUser)())
+  fetchUsers: () => dispatch((0,_store_users__WEBPACK_IMPORTED_MODULE_2__.fetchUser)()),
+  current: () => dispatch((0,_store_auth__WEBPACK_IMPORTED_MODULE_3__.me)())
 });
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapState, mapDispatch)(AllUsers));
