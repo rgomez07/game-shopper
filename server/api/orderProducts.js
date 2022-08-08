@@ -55,12 +55,15 @@ router.put("/:userId", async (req, res, next) => {
         },
       ],
     });
+    console.log("this be the userCart", userCart.orders[0].products);
 
     if (userCart.orders.length) {
       const productInCart = await Order_Products.findOne({
         where: {
           //if we have an order in the cart, check if the productId on an order product matches the incoming id
           productId: req.body.id,
+          orderId: userCart.orders[0].products[0].orderId,
+          // ^ all products in open cart have the same orderId, just need to access the value in some way
         },
       });
 
