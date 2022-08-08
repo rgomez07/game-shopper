@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logout, me } from '../store/auth';
+import { fetchUser } from '../store/users';
 import { FiShoppingCart } from 'react-icons/fi';
 export class Navbar extends React.Component {
   componentDidMount() {
@@ -28,14 +29,17 @@ export class Navbar extends React.Component {
               >
                 Logout
               </a>
+              <Link
+                to={`/users/cart/${this.props.id}`}
+                className="cartTextColor"
+              >
+                <FiShoppingCart />
+              </Link>
               {this.props.userType === 'Admin' ? (
                 <Link to="/users" className="textColor">
                   Users
                 </Link>
               ) : null}
-              <Link to={`/users/cart/${id}`} className="cartTextColor">
-                <FiShoppingCart />
-              </Link>
             </div>
           ) : (
             <div>
