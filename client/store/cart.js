@@ -34,7 +34,7 @@ export const fetchCart = (id) => async (dispatch) => {
 };
 
 //Reducer
-export default function cartReducer(state = {}, action) {
+export default function cartReducer(state = [], action) {
   switch (action.type) {
     case DELETE_PRODUCT:
       return state.filter((cartProduct) => {

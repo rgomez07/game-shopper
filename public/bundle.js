@@ -2151,7 +2151,7 @@ class Routes extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       component: _components_singleProducts_SingleProduct__WEBPACK_IMPORTED_MODULE_4__["default"]
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
       exact: true,
-      path: "/cart",
+      path: "/cart/:id",
       component: _components_Cart__WEBPACK_IMPORTED_MODULE_5__["default"]
     })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
       path: "/",
@@ -2169,7 +2169,7 @@ class Routes extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       component: _components_singleProducts_SingleProduct__WEBPACK_IMPORTED_MODULE_4__["default"]
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
       exact: true,
-      path: "/cart",
+      path: "/cart/:id",
       component: _components_Cart__WEBPACK_IMPORTED_MODULE_5__["default"]
     })));
   }
@@ -2213,40 +2213,28 @@ const mapDispatch = dispatch => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "DisplayCart": () => (/* binding */ DisplayCart),
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
-/* harmony export */   "fakeData": () => (/* binding */ fakeData)
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _store_cart__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/cart */ "./client/store/cart.js");
+/* harmony import */ var _store_cart__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store/cart */ "./client/store/cart.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 
 
 
-const fakeData = [{
-  name: 'COD',
-  price: '200',
-  image: 'https://media.rawg.io/media/games/2c1/2c1984e128ac48b89953ed4de4904a3b.jpg',
-  id: 1
-}, {
-  name: 'game',
-  price: '100',
-  image: 'https://media.rawg.io/media/games/99e/99e937e4cc518d641317116c9d8d9046.jpg',
-  id: 2
-}];
 class DisplayCart extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   componentDidMount() {
-    this.props.fetchCart(this.props.match.params.id);
-    console.log('heeerrree----', this.props.cart);
+    this.props.fetchCart(this.props.match.params.id); //console.log('this is this.props', this.props);
   }
 
   render() {
-    console.log('heeerrree----', this.props.cart);
+    const userCart = this.props.cart;
+    console.log('heeerrree----', userCart);
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
       className: "textColor"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
       id: "products",
       className: "list"
-    }, fakeData.length ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Your Cart"), fakeData.map(product => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    }, userCart.length ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Your Cart is:"), userCart.map(product => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
       key: product.id
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
       className: "",
@@ -2266,11 +2254,11 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    fetchCart: id => dispatch((0,_store_cart__WEBPACK_IMPORTED_MODULE_2__.fetchCart)(id))
+    fetchCart: id => dispatch((0,_store_cart__WEBPACK_IMPORTED_MODULE_1__.fetchCart)(id))
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapState, mapDispatch)(DisplayCart));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_2__.connect)(mapState, mapDispatch)(DisplayCart));
 
 /***/ }),
 
@@ -3021,7 +3009,7 @@ const fetchCart = id => async dispatch => {
   dispatch(getCart(data));
 }; //Reducer
 
-function cartReducer(state = {}, action) {
+function cartReducer(state = [], action) {
   switch (action.type) {
     case DELETE_PRODUCT:
       return state.filter(cartProduct => {

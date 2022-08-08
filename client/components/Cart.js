@@ -1,38 +1,24 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { fetchCart } from '../store/cart';
-export const fakeData = [
-  {
-    name: 'COD',
-    price: '200',
-    image:
-      'https://media.rawg.io/media/games/2c1/2c1984e128ac48b89953ed4de4904a3b.jpg',
-    id: 1,
-  },
-  {
-    name: 'game',
-    price: '100',
-    image:
-      'https://media.rawg.io/media/games/99e/99e937e4cc518d641317116c9d8d9046.jpg',
-    id: 2,
-  },
-];
+import { connect } from 'react-redux';
 
 export class DisplayCart extends React.Component {
   componentDidMount() {
     this.props.fetchCart(this.props.match.params.id);
-    console.log('heeerrree----', this.props.cart);
+    //console.log('this is this.props', this.props);
   }
 
   render() {
-    console.log('heeerrree----', this.props.cart);
+    const userCart = this.props.cart;
+
+    console.log('heeerrree----', userCart);
     return (
       <div className="textColor">
         <div id="products" className="list">
-          {fakeData.length ? (
+          {userCart.length ? (
             <div>
-              <h2>Your Cart</h2>
-              {fakeData.map((product) => (
+              <h2>Your Cart is:</h2>
+              {userCart.map((product) => (
                 <div key={product.id}>
                   <img className="" src={product.image} />
                   {product.name}
