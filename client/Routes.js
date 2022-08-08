@@ -32,7 +32,7 @@ class Routes extends Component {
             <Route exact path="/users/:id" component={SingleUser} />
             <Route exact path="/users/:id/profile" component={UserProfile} />
             <Route exact path="/products/:id" component={SingleProduct} />
-            <Route exact path="/cart/:id" component={Cart} />
+            <Route exact path="/users/cart/:id" component={Cart} />
           </Switch>
         ) : (
           <Switch>

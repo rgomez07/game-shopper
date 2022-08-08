@@ -2,13 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logout } from '../store';
-
+import { FiShoppingCart } from 'react-icons/fi';
 
 const Navbar = ({ handleClick, isLoggedIn, id }) => (
   <div>
     <Link to="/home" className="textColor">
-    <h1 className="pageTitle">Game Shopper</h1>
+      <h1 className="pageTitle">Game Shopper</h1>
     </Link>
+
     <nav>
       {isLoggedIn ? (
         <div>
@@ -24,6 +25,9 @@ const Navbar = ({ handleClick, isLoggedIn, id }) => (
           </Link>
           <Link to={`/users/${id}/profile`} className="textColor">
             Profile
+          </Link>
+          <Link to={`/users/cart/${id}`} className="cartTextColor">
+            <FiShoppingCart />
           </Link>
         </div>
       ) : (
