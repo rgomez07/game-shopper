@@ -112,24 +112,44 @@ router.put("/:id", async (req, res, next) => {
   }
 });
 
-// DELETE /api/cart/:productId
+// DELETE /api/cart/:userId/:productId
 
-router.delete('/:productId', async (req,res,next) => {
-  try{
-    const deletedProduct = await Order_Products.findOne({
-      // using findOne to be sure we're only deleting one product
+router.delete("/:userId/:productId", async (req, res, next) => {
+  try {
+    const user = await User.findOne({
       where: {
-        productId: req.params.productId
-      }
-    })
-    if(!deletedProduct) {
+        id: req.params.userId,
+      },
+      include: [
+        {
+          // join it with corresponding open order
+          model: Order,
+          where: {
+            status: "open",
+          },
+        },
+      ],
+    });
+    if (!user) {
       res.sendStatus(404)
     } else {
-      await deletedProduct.destroy()
-      res.send(deletedProduct)
-    }
+      // if user exists - if statement, else - send status 404
+      const deletedProduct = await Order_Products.findOne({
+        // using findOne to be sure we're only deleting one product
+        where: {
+          productId: req.params.productId,
+          orderId: user.orders[0].id,
+        },
+      });
 
+      if (!deletedProduct) {
+        res.sendStatus(404);
+      } else {
+        await deletedProduct.destroy();
+        res.send(deletedProduct);
+      }
+    }
   } catch (err) {
-    next(err)
+    next(err);
   }
-})
+});
