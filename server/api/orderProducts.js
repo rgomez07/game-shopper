@@ -55,14 +55,13 @@ router.put("/:userId", async (req, res, next) => {
         },
       ],
     });
-    console.log("this be the userCart", userCart.orders[0].products);
 
     if (userCart.orders.length) {
       const productInCart = await Order_Products.findOne({
         where: {
           //if we have an order in the cart, check if the productId on an order product matches the incoming id
           productId: req.body.id,
-          orderId: userCart.orders[0].products[0].order_product.orderId,
+          orderId: userCart.orders[0].id,
           // ^ all products in open cart have the same orderId, just need to access the value in some way
         },
       });
@@ -76,18 +75,24 @@ router.put("/:userId", async (req, res, next) => {
         await Order_Products.create({
           quantity: req.body.quantity,
           unit_price: req.body.unit_price,
-          productId: req.body.productId,
-          orderId: req.body.orderId,
+          productId: req.body.id,
+          orderId: userCart.orders[0].id,
+          // ^ if user has an order, can set orderId using the existing order's id here
         });
       }
     } else {
-      // no order, so we need to create one and add product to the order
-      await Order.create({ status: "open" });
+      // no order, so we need to create one and add a product to the order
+      const order = await Order.create({ status: "open" });
+      // order needs to be associated with user
+      const user = await User.findByPk(req.params.userId);
+      await order.setUser(user);
+
       await Order_Products.create({
         quantity: req.body.quantity,
         unit_price: req.body.unit_price,
-        productId: req.body.productId,
-        orderId: req.body.orderId,
+        productId: req.body.id,
+        orderId: order.id,
+        // ^ if user doesn't have id, can set the order id based on the id of the recently created order
       });
     }
 
