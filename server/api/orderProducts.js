@@ -37,11 +37,11 @@ router.get("/:id", async (req, res, next) => {
 });
 
 //add to cart
-router.put("/:id", async (req, res, next) => {
+router.put("/:userId", async (req, res, next) => {
   try {
     const userCart = await User.findOne({
       where: {
-        id: req.params.id,
+        id: req.params.userId,
       },
       include: [
         {
@@ -55,10 +55,12 @@ router.put("/:id", async (req, res, next) => {
         },
       ],
     });
+
     if (userCart.orders.length) {
       const productInCart = await Order_Products.findOne({
         where: {
-          orderId: req.body.id,
+          //if we have an order in the cart, check if the productId on an order product matches the incoming id
+          productId: req.body.id,
         },
       });
 
@@ -92,25 +94,3 @@ router.put("/:id", async (req, res, next) => {
     next(error);
   }
 });
-
-// DELETE /api/cart/:productId
-
-router.delete('/:productId', async (req,res,next) => {
-  try{
-    const deletedProduct = await Order_Products.findOne({
-      // using findOne to be sure we're only deleting one product
-      where: {
-        productId: req.params.productId
-      }
-    })
-    if(!deletedProduct) {
-      res.sendStatus(404)
-    } else {
-      await deletedProduct.destroy()
-      res.send(deletedProduct)
-    }
-
-  } catch (err) {
-    next(err)
-  }
-})

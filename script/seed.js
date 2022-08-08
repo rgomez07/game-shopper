@@ -28,7 +28,7 @@ async function seed() {
   ]);
 
   const product = await Promise.all([
-    //PRICE IS IN CENTS TO AVOID CALC ISSUES, FRONTEND WILL DIVIDE BY 100 FOR DISPLAY
+    //price is in cents to avoid calculation issues, the frontend will divide by 100 to display the correct value
     Product.create({
       name: "Tunic",
       description:
@@ -112,7 +112,7 @@ async function seed() {
       price: 5999,
       esrb: "Mature",
       image:
-        "https://media.rawg.io/media/games/99e/99e937e4cc518d641317116c9d8d9046.jpg",
+        "https://media.rawg.io/media/games/3ac/3ac2b5356ad764a87092d15cdcbee809.jpg",
       rating: 85,
       multiplayer: "No",
     }),
