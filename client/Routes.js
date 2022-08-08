@@ -4,6 +4,7 @@ import { withRouter, Route, Switch, Redirect } from 'react-router-dom';
 import AllUsers from './components/Users/AllUsers';
 import SingleUser from './components/Users/SingleUser';
 import SingleProduct from './components/singleProducts/SingleProduct';
+import Cart from './components/Cart';
 import Signup from './components/SignUp';
 import Login from './components/Login';
 import Home from './components/Home';
@@ -24,18 +25,18 @@ class Routes extends Component {
       <div>
         {isLoggedIn ? (
           <Switch>
-            <Route path='/home' component={Home} />
+            <Route path="/home" component={Home} />
             {/* <Redirect to="/home" /> */}
-            <Route exact path='/users' component={AllUsers} />
-            <Route exact path='/users/:id' component={SingleUser} />
-            <Route exact path='/products/:id' component={SingleProduct} />
+            <Route exact path="/users" component={AllUsers} />
+            <Route exact path="/users/:id" component={SingleUser} />
+            <Route exact path="/products/:id" component={SingleProduct} />
           </Switch>
         ) : (
           <Switch>
-            <Route path='/' exact component={Login} />
-            <Route path='/login' component={Login} />
-            <Route path='/signup' component={Signup} />
-            <Route exact path='/products:id' component={SingleProduct} />
+            <Route path="/" exact component={Login} />
+            <Route path="/login" component={Login} />
+            <Route path="/signup" component={Signup} />
+            <Route exact path="/products:id" component={SingleProduct} />
           </Switch>
         )}
       </div>

@@ -16,27 +16,30 @@ class SingleProduct extends React.Component {
         {product.name ? (
           <div className="textColor">
             <h2>{product.name}</h2>
-            <img src={product.image} />
+            <div>
+              <img src={product.image} />
+            </div>
+            <button className="addToCartBtn" type="submit">
+              Add To Cart
+            </button>
             <h3>${product.price / 100}</h3>
-            <body>
-              <b>Platform:</b> {product.platform}
-              <br />
-              <br />
-              <b>Description:</b> {product.description}
-              <br />
-              <br />
-              <b>ESRB:</b> {product.esrb} <br />
-              <br />
-              {product.multiplayer ? (
-                <b>Supports multiplayer</b>
-              ) : (
-                <b>Does not support multiplayer</b>
-              )}
-              <br />
-              <br />
-              <b>Metacritic Rating:</b> {product.rating}/100
-              <br />
-            </body>
+            <b>Platform:</b> {product.platform}
+            <br />
+            <br />
+            <b>Description:</b> {product.description}
+            <br />
+            <br />
+            <b>ESRB:</b> {product.esrb} <br />
+            <br />
+            {product.multiplayer ? (
+              <b>Supports multiplayer</b>
+            ) : (
+              <b>Does not support multiplayer</b>
+            )}
+            <br />
+            <br />
+            <b>Metacritic Rating:</b> {product.rating}/100
+            <br />
           </div>
         ) : (
           <NotFound />
