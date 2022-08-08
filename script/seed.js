@@ -326,7 +326,6 @@ async function seed() {
       product19: product[18],
       product20: product[19],
     },
-    // order_product1: order_product[0],
     order1: order[0],
   };
 }
