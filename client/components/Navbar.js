@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logout, me } from '../store/auth';
-import { fetchUser } from '../../store/users';
+import { fetchUser } from '../store/users';
 export class Navbar extends React.Component {
   componentDidMount() {
     this.props.current(), this.props.handleClick(), this.props.fetchUsers();
