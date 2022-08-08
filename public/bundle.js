@@ -2344,7 +2344,7 @@ __webpack_require__.r(__webpack_exports__);
 
 class Navbar extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   componentDidMount() {
-    this.props.current(), this.props.handleClick(), this.props.fetchUsers();
+    this.props.current(), this.props.handleClick();
   }
 
   render() {
@@ -2360,10 +2360,10 @@ class Navbar extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       href: "#",
       onClick: this.props.handleClick,
       className: "textColor"
-    }, "Logout"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
+    }, "Logout"), this.props.userType === 'Admin' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
       to: "/users",
       className: "textColor"
-    }, "Users")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
+    }, "Users") : null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
       to: "/login",
       className: "textColor"
     }, "Login"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
@@ -2380,7 +2380,7 @@ class Navbar extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
 const mapState = state => {
   return {
     isLoggedIn: !!state.auth.id,
-    userType: state.auth
+    userType: state.auth.userType
   };
 };
 
@@ -2392,10 +2392,6 @@ const mapDispatch = dispatch => {
 
     current() {
       dispatch((0,_store_auth__WEBPACK_IMPORTED_MODULE_2__.me)());
-    },
-
-    fetchUser() {
-      dispatch((0,_store_users__WEBPACK_IMPORTED_MODULE_3__.fetchUser)());
     }
 
   };

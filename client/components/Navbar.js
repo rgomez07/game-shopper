@@ -5,7 +5,7 @@ import { logout, me } from '../store/auth';
 import { fetchUser } from '../store/users';
 export class Navbar extends React.Component {
   componentDidMount() {
-    this.props.current(), this.props.handleClick(), this.props.fetchUsers();
+    this.props.current(), this.props.handleClick();
   }
   render() {
     {
@@ -27,9 +27,11 @@ export class Navbar extends React.Component {
                 className='textColor'>
                 Logout
               </a>
-              <Link to='/users' className='textColor'>
-                Users
-              </Link>
+              {this.props.userType === 'Admin' ? (
+                <Link to='/users' className='textColor'>
+                  Users
+                </Link>
+              ) : null}
             </div>
           ) : (
             <div>
@@ -55,7 +57,7 @@ export class Navbar extends React.Component {
 const mapState = (state) => {
   return {
     isLoggedIn: !!state.auth.id,
-    userType: state.auth,
+    userType: state.auth.userType,
   };
 };
 
@@ -66,9 +68,6 @@ const mapDispatch = (dispatch) => {
     },
     current() {
       dispatch(me());
-    },
-    fetchUser() {
-      dispatch(fetchUser());
     },
   };
 };
