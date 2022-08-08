@@ -5,9 +5,9 @@ const DELETE_PRODUCT = 'DELETE_PRODUCT'
 
 
 // action creator(s)
-export const deleteCartProduct = (productId) => ({
+export const deleteCartProduct = (product) => ({
   type: DELETE_PRODUCT,
-  productId
+  product
 })
 
 // thunks
@@ -28,7 +28,9 @@ export const deleteCartItem = (productId, history) => {
 export default function cartReducer(state = {}, action) {
   switch (action.type) {
       case DELETE_PRODUCT:
-          return {...state}.filter((cartState) => cartState.id !== action.productId);
+        return state.filter((cartProduct) => {
+          return cartProduct.id !== action.product.id
+        })
       default:
           return state;
   }
