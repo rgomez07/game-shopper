@@ -38,7 +38,7 @@ router.get("/:id", async (req, res, next) => {
 
 //add to cart
 
-router.put("/:userId", async (req, res, next) => {
+router.put('/:userId', async (req, res, next) => {
   try {
     const userCart = await User.findOne({
       where: {
@@ -56,7 +56,6 @@ router.put("/:userId", async (req, res, next) => {
         },
       ],
     });
-
     if (userCart === null) {
       // no order, so we need to create one and add a product to the order
       const newOrder = await Order.create({ status: "open" });
@@ -107,7 +106,7 @@ router.put("/:userId", async (req, res, next) => {
 
 // DELETE /api/cart/:userId/:productId
 
-router.delete("/:userId/:productId", async (req, res, next) => {
+router.delete('/:userId/:productId', async (req, res, next) => {
   try {
     const user = await User.findOne({
       where: {
@@ -118,7 +117,7 @@ router.delete("/:userId/:productId", async (req, res, next) => {
           // join it with corresponding open order
           model: Order,
           where: {
-            status: "open",
+            status: 'open',
           },
         },
       ],
