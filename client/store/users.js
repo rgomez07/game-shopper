@@ -33,10 +33,14 @@ export const toAddUser = (userList, history) => async (dispatch) => {
   history.push('/users');
 };
 export const toDeleteUser = (id, history) => async (dispatch) => {
+  try{
   await axios
     .delete(`/api/users/${id}`)
     .then(() => dispatch(deleteUser(id)));
-  history.push('/users');
+    history.push('/users');
+  } catch (err) {
+    console.log('error deleting user',err)
+  }
 };
 //Reducer
 export default function userListReducer(state = [], action) {
