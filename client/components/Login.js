@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { login } from '../store/auth';
+import NotLoggedInProducts from './products/NotLoggedInProducts';
 
 /**
  * COMPONENT
@@ -31,6 +32,9 @@ class Login extends React.Component {
           </div>
           {error && error.response && <div> {error.response.data} </div>}
         </form>
+        <br/>
+        <br/>
+        <NotLoggedInProducts />
       </div>
     );
   }
