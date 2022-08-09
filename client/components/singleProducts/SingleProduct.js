@@ -1,12 +1,28 @@
 import React from 'react';
 import { fetchSingleProduct } from '../../store/singleProduct';
+import { addCartItem } from '../../store/cart';
 import { connect } from 'react-redux';
 import NotFound from '../NotFound';
 
 class SingleProduct extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      userId: this.props.match.params.userId,
+      id: this.props.match.params.id,
+      unit_price: this.props.singleProduct.price,
+    };
+    this.handleClick = this.handleClick.bind(this);
+  }
+
   componentDidMount() {
     this.props.fetchSingleProduct(this.props.match.params.id);
-    console.log('this is this.props', this.props);
+    console.log('this is this.props in single product', this.props);
+  }
+  handleClick(evt) {
+    evt.preventDefault();
+    this.props.addCartItem(this.state);
+    console.log('this.state in single product', this.state);
   }
 
   render() {
@@ -19,7 +35,11 @@ class SingleProduct extends React.Component {
             <div>
               <img src={product.image} />
             </div>
-            <button className="addToCartBtn" type="submit">
+            <button
+              className="addToCartBtn"
+              type="submit"
+              onClick={this.handleClick}
+            >
               Add To Cart
             </button>
             <h3>${product.price / 100}</h3>
@@ -55,9 +75,10 @@ const mapState = (state) => {
   };
 };
 
-const mapDispatch = (dispatch) => {
+const mapDispatch = (dispatch, { history }) => {
   return {
     fetchSingleProduct: (id) => dispatch(fetchSingleProduct(id)),
+    addCartItem: (product) => dispatch(addCartItem(product, history)),
   };
 };
 
