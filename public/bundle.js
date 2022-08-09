@@ -2430,9 +2430,12 @@ class Navbar extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     {
       console.log('NAVBAR PROPS -->', this.props.userType);
     }
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
+      to: "/home",
+      className: "textColor"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
       className: "pageTitle"
-    }, "Game Shopper"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("nav", null, this.props.isLoggedIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
+    }, "Game Shopper")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("nav", null, this.props.isLoggedIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
       to: "/home",
       className: "textColor"
     }, "Home"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
@@ -2442,7 +2445,9 @@ class Navbar extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     }, "Logout"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
       to: `/users/cart/${this.props.id}`,
       className: "cartTextColor"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__.FiShoppingCart, null)), this.props.userType === 'Admin' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__.FiShoppingCart, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
+      to: `/users/${this.props.id}/profile`
+    }, "Profile"), this.props.userType === 'Admin' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
       to: "/users",
       className: "textColor"
     }, "Users") : null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
@@ -3121,7 +3126,7 @@ const deleteCartItem = (productId, history) => {
       const {
         data: cartItem
       } = await axios__WEBPACK_IMPORTED_MODULE_0___default()["delete"](`/api/cart/${productId}`);
-      dispatch(_deleteStudent(cartItem));
+      dispatch(deleteCartProduct(cartItem));
     } catch (err) {
       console.log('error deleting item from cart', err);
     }
