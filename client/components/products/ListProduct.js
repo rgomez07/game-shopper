@@ -3,10 +3,12 @@ import { Link } from 'react-router-dom';
 
 class ListProduct extends React.Component {
   render() {
-    const { products } = this.props;
+    const { products, user } = this.props;
+
+    console.log('herrreee listproduct', this.props);
     return (
       <div>
-        <Link to={`/products/${products.id}`}>
+        <Link to={`/products/${products.id}/users/${user.id}`}>
           <img src={products.image} />
           <h3 className="allProductViewName">{products.name}</h3>
         </Link>
