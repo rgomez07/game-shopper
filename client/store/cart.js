@@ -21,7 +21,7 @@ export const deleteCartItem = (productId, history) => {
   return async (dispatch) => {
     try {
       const { data: cartItem } = await axios.delete(`/api/cart/${productId}`);
-      dispatch(_deleteStudent(cartItem));
+      dispatch(deleteCartProduct(cartItem));
     } catch (err) {
       console.log('error deleting item from cart', err);
     }
