@@ -9,6 +9,7 @@ export class AllProducts extends React.Component {
   }
 
   render(error) {
+    console.log('this is allproductporps', this.props);
     if (error) {
       return <h3 className="textColor">No products available at this time</h3>;
     } else {
@@ -19,7 +20,11 @@ export class AllProducts extends React.Component {
               <div>
                 <h2>Check out these awesome games</h2>
                 {this.props.products.map((product) => (
-                  <ListProduct products={product} key={product.id} />
+                  <ListProduct
+                    products={product}
+                    key={product.id}
+                    user={this.props.user}
+                  />
                 ))}
               </div>
             ) : (

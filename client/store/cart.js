@@ -3,6 +3,7 @@ import axios from 'axios';
 // action type
 const DELETE_PRODUCT = 'DELETE_PRODUCT';
 const GET_CART = 'GET_CART';
+const ADD_CART_PRODUCT = 'ADD_CART_PRODUCT';
 
 // action creator(s)
 export const deleteCartProduct = (product) => ({
@@ -15,15 +16,35 @@ export const getCart = (cart) => {
     cart,
   };
 };
+export const addCartProduct = (product) => ({
+  type: ADD_CART_PRODUCT,
+  product,
+});
 
 // thunks
-export const deleteCartItem = (productId, history) => {
+export const deleteCartItem = (userId, productId, history) => {
   return async (dispatch) => {
     try {
-      const { data: cartItem } = await axios.delete(`/api/cart/${productId}`);
+      const { data: cartItem } = await axios.delete(
+        `/api/cart/${userId}/${productId}`
+      );
       dispatch(deleteCartProduct(cartItem));
+      history.push(`/cart/${userId}`);
     } catch (err) {
       console.log('error deleting item from cart', err);
+    }
+  };
+};
+export const addCartItem = (order, history) => {
+  return async (dispatch) => {
+    try {
+      const { data: cartItem } = await axios.put(
+        `/api/cart/${order.userId}`,
+        order
+      );
+      dispatch(addCartProduct(cartItem));
+    } catch (err) {
+      console.log('error adding item from cart', err);
     }
   };
 };
@@ -42,6 +63,8 @@ export default function cartReducer(state = [], action) {
       });
     case GET_CART:
       return action.cart;
+    case ADD_CART_PRODUCT:
+      return [...state, action.product];
     default:
       return state;
   }
