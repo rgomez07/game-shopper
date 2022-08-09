@@ -2673,6 +2673,49 @@ const mapDispatch = dispatch => ({
 
 /***/ }),
 
+/***/ "./client/components/Users/DeleteUser.js":
+/*!***********************************************!*\
+  !*** ./client/components/Users/DeleteUser.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _store_users__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../store/users */ "./client/store/users.js");
+
+
+
+
+const DeleteUser = props => {
+  const {
+    id
+  } = props.user;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+    onSubmit: ev => ev.preventDefault()
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+    type: "button",
+    className: "remove",
+    onClick: () => props.deleteUser(id)
+  }, "Delete"));
+};
+
+const mapDispatchToProps = (dispatch, {
+  history
+}) => {
+  return {
+    deleteUser: id => dispatch((0,_store_users__WEBPACK_IMPORTED_MODULE_2__.toDeleteUser)(id, history))
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(null, mapDispatchToProps)(DeleteUser));
+
+/***/ }),
+
 /***/ "./client/components/Users/SingleUser.js":
 /*!***********************************************!*\
   !*** ./client/components/Users/SingleUser.js ***!
@@ -2687,6 +2730,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _store_singleUser__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../store/singleUser */ "./client/store/singleUser.js");
+/* harmony import */ var _DeleteUser__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./DeleteUser */ "./client/components/Users/DeleteUser.js");
+
 
 
 
@@ -2705,7 +2750,9 @@ class SingeUser extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     const {
       admin
     } = this.props.singleUser;
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Name: ", this.props.singleUser.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "User Type: ", this.props.singleUser.userType), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, this.props.singleUser.email), console.log(this.props.singleUser));
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Name: ", this.props.singleUser.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "User Type: ", this.props.singleUser.userType), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, this.props.singleUser.email), console.log(this.props.singleUser), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_DeleteUser__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      user: this.props.singleUser
+    }));
   }
 
 }
@@ -2715,7 +2762,7 @@ const mapState = state => ({
 });
 
 const mapDispatch = dispatch => ({
-  fetchSingleUser: id => dispatch((0,_store_singleUser__WEBPACK_IMPORTED_MODULE_2__.fetchSingleUser)(id))
+  fetchSingleUser: id => dispatch((0,_store_singleUser__WEBPACK_IMPORTED_MODULE_2__.fetchSingleUser)(id, history))
 });
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapState, mapDispatch)(SingeUser));
@@ -3577,8 +3624,12 @@ const toAddUser = (userList, history) => async dispatch => {
   history.push('/users');
 };
 const toDeleteUser = (id, history) => async dispatch => {
-  await axios__WEBPACK_IMPORTED_MODULE_0___default()["delete"](`/api/users/${id}`).then(() => dispatch(deleteUser(id)));
-  history.push('/users');
+  try {
+    await axios__WEBPACK_IMPORTED_MODULE_0___default()["delete"](`/api/users/${id}`).then(() => dispatch(deleteUser(id)));
+    history.push('/users');
+  } catch (err) {
+    console.log('error deleting user', err);
+  }
 }; //Reducer
 
 function userListReducer(state = [], action) {

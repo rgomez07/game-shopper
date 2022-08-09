@@ -1,7 +1,8 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { fetchSingleUser } from '../../store/singleUser';
+import React from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { fetchSingleUser } from "../../store/singleUser";
+import DeleteUser from "./DeleteUser";
 
 class SingeUser extends React.Component {
   constructor() {
@@ -21,6 +22,7 @@ class SingeUser extends React.Component {
         <br />
         <h2>{this.props.singleUser.email}</h2>
         {console.log(this.props.singleUser)}
+        <DeleteUser user={this.props.singleUser} />
       </div>
     );
   }
@@ -29,7 +31,7 @@ class SingeUser extends React.Component {
 const mapState = (state) => ({ singleUser: state.singleUserReducer });
 
 const mapDispatch = (dispatch) => ({
-  fetchSingleUser: (id) => dispatch(fetchSingleUser(id)),
+  fetchSingleUser: (id) => dispatch(fetchSingleUser(id, history)),
 });
 
 export default connect(mapState, mapDispatch)(SingeUser);
