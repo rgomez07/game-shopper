@@ -11,6 +11,7 @@ class SingleProduct extends React.Component {
       userId: this.props.match.params.userId,
       id: this.props.match.params.id,
       unit_price: this.props.singleProduct.price,
+      //quantity:1,
     };
     this.handleClick = this.handleClick.bind(this);
   }

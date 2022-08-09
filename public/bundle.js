@@ -2289,7 +2289,6 @@ const Home = props => {
   const {
     user
   } = props;
-  console.log('hereeeee main page props', props);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", {
     className: "textColor"
   }, "Welcome, ", user.username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_products_AllProducts__WEBPACK_IMPORTED_MODULE_2__["default"], {
@@ -3007,7 +3006,8 @@ class SingleProduct extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     this.state = {
       userId: this.props.match.params.userId,
       id: this.props.match.params.id,
-      unit_price: this.props.singleProduct.price
+      unit_price: this.props.singleProduct.price //quantity:1,
+
     };
     this.handleClick = this.handleClick.bind(this);
   }
