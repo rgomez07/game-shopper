@@ -68,7 +68,7 @@ router.put('/:userId', async (req, res, next) => {
         quantity: req.body.quantity,
         unit_price: req.body.unit_price,
         productId: req.body.id,
-        orderId: order.id,
+        orderId: newOrder.id,
         // ^ if user doesn't have id, can set the order id based on the id of the recently created order
       });
     } else if (userCart.orders.length) {
