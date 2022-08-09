@@ -1,12 +1,12 @@
-const router = require("express").Router();
+const router = require('express').Router();
 const {
   models: { Product, User, Order },
-} = require("../db");
-const Order_Products = require("../db/models/OrderProduct");
+} = require('../db');
+const Order_Products = require('../db/models/OrderProduct');
 module.exports = router;
 
 //get cart
-router.get("/:id", async (req, res, next) => {
+router.get('/:id', async (req, res, next) => {
   try {
     const userCart = await User.findOne({
       where: {
@@ -17,7 +17,7 @@ router.get("/:id", async (req, res, next) => {
           // join it with corresponding open order
           model: Order,
           where: {
-            status: "open",
+            status: 'open',
           },
           // join it with corresponding product(s)
           include: [Product],
@@ -37,7 +37,9 @@ router.get("/:id", async (req, res, next) => {
 });
 
 //add to cart
+
 router.put("/:userId", async (req, res, next) => {
+
   try {
     const userCart = await User.findOne({
       where: {
@@ -48,13 +50,14 @@ router.put("/:userId", async (req, res, next) => {
           // join it with corresponding open order
           model: Order,
           where: {
-            status: "open",
+            status: 'open',
           },
           // join it with corresponding product(s)
           include: [Product],
         },
       ],
     });
+
 
     if (userCart.orders.length) {
       const productInCart = await Order_Products.findOne({
@@ -101,5 +104,47 @@ router.put("/:userId", async (req, res, next) => {
     res.send(productList);
   } catch (error) {
     next(error);
+  }
+});
+
+// DELETE /api/cart/:userId/:productId
+
+router.delete("/:userId/:productId", async (req, res, next) => {
+  try {
+    const user = await User.findOne({
+      where: {
+        id: req.params.userId,
+      },
+      include: [
+        {
+          // join it with corresponding open order
+          model: Order,
+          where: {
+            status: "open",
+          },
+        },
+      ],
+    });
+    if (!user) {
+      res.sendStatus(404)
+    } else {
+      // if user exists - if statement, else - send status 404
+      const deletedProduct = await Order_Products.findOne({
+        // using findOne to be sure we're only deleting one product
+        where: {
+          productId: req.params.productId,
+          orderId: user.orders[0].id,
+        },
+      });
+
+      if (!deletedProduct) {
+        res.sendStatus(404);
+      } else {
+        await deletedProduct.destroy();
+        res.send(deletedProduct);
+      }
+    }
+  } catch (err) {
+    next(err);
   }
 });

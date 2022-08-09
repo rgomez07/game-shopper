@@ -9,6 +9,7 @@ import Signup from './components/SignUp';
 import Login from './components/Login';
 import Home from './components/Home';
 import { me } from './store';
+import UserProfile from './components/Users/UserProfile';
 
 /**
  * COMPONENT
@@ -29,7 +30,9 @@ class Routes extends Component {
             {/* <Redirect to="/home" /> */}
             <Route exact path="/users" component={AllUsers} />
             <Route exact path="/users/:id" component={SingleUser} />
+            <Route exact path="/users/:id/profile" component={UserProfile} />
             <Route exact path="/products/:id" component={SingleProduct} />
+            <Route exact path="/users/cart/:id" component={Cart} />
           </Switch>
         ) : (
           <Switch>
@@ -37,6 +40,7 @@ class Routes extends Component {
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route exact path="/products:id" component={SingleProduct} />
+            <Route exact path="/cart/:id" component={Cart} />
           </Switch>
         )}
       </div>
