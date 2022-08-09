@@ -10,6 +10,8 @@ import Login from './components/Login';
 import Home from './components/Home';
 import { me } from './store';
 import UserProfile from './components/Users/UserProfile';
+import NLISingleProduct from './components/singleProducts/NLISingleProduct';
+import NotLoggedInProducts from './components/products/NotLoggedInProducts';
 
 /**
  * COMPONENT
@@ -40,10 +42,11 @@ class Routes extends Component {
           </Switch>
         ) : (
           <Switch>
-            <Route path="/" exact component={Login} />
+            {/* <Route path="/" exact component={Login} /> */}
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
-            <Route exact path="/products:id" component={SingleProduct} />
+            <Route exact path="/products" component={NotLoggedInProducts} />
+            <Route exact path="/products/:id" component={NLISingleProduct} />
             <Route exact path="/cart/:id" component={Cart} />
           </Switch>
         )}
