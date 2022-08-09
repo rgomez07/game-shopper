@@ -2148,7 +2148,7 @@ class Routes extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       component: _components_Users_UserProfile__WEBPACK_IMPORTED_MODULE_10__["default"]
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
       exact: true,
-      path: "/products/:id",
+      path: "/products/:id/users/:userId",
       component: _components_singleProducts_SingleProduct__WEBPACK_IMPORTED_MODULE_4__["default"]
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
       exact: true,
@@ -2287,11 +2287,14 @@ __webpack_require__.r(__webpack_exports__);
 
 const Home = props => {
   const {
-    username
+    user
   } = props;
+  console.log('hereeeee main page props', props);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", {
     className: "textColor"
-  }, "Welcome, ", username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_products_AllProducts__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+  }, "Welcome, ", user.username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_products_AllProducts__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    user: user
+  }));
 };
 /**
  * CONTAINER
@@ -2299,7 +2302,7 @@ const Home = props => {
 
 const mapState = state => {
   return {
-    username: state.auth.username
+    user: state.auth
   };
 };
 
@@ -2891,6 +2894,8 @@ class AllProducts extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   }
 
   render(error) {
+    console.log('this is allproductporps', this.props);
+
     if (error) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", {
         className: "textColor"
@@ -2903,7 +2908,8 @@ class AllProducts extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         className: "list"
       }, this.props.products.length ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Check out these awesome games"), this.props.products.map(product => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ListProduct__WEBPACK_IMPORTED_MODULE_3__["default"], {
         products: product,
-        key: product.id
+        key: product.id,
+        user: this.props.user
       }))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", {
         className: "textColor"
       }, "there are no games to display currently")));
@@ -2947,10 +2953,12 @@ __webpack_require__.r(__webpack_exports__);
 class ListProduct extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   render() {
     const {
-      products
+      products,
+      user
     } = this.props;
+    console.log('herrreee listproduct', this.props);
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
-      to: `/products/${products.id}`
+      to: `/products/${products.id}/users/${user.id}`
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
       src: products.image
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", {
@@ -2984,17 +2992,35 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _store_singleProduct__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../store/singleProduct */ "./client/store/singleProduct.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _NotFound__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../NotFound */ "./client/components/NotFound.js");
+/* harmony import */ var _store_cart__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../store/cart */ "./client/store/cart.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _NotFound__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../NotFound */ "./client/components/NotFound.js");
+
 
 
 
 
 
 class SingleProduct extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      userId: this.props.match.params.userId,
+      id: this.props.match.params.id,
+      unit_price: this.props.singleProduct.price
+    };
+    this.handleClick = this.handleClick.bind(this);
+  }
+
   componentDidMount() {
     this.props.fetchSingleProduct(this.props.match.params.id);
-    console.log('this is this.props', this.props);
+    console.log('this is this.props in single product', this.props);
+  }
+
+  handleClick(evt) {
+    evt.preventDefault();
+    this.props.addCartItem(this.state);
+    console.log('this.state in single product', this.state);
   }
 
   render() {
@@ -3005,8 +3031,9 @@ class SingleProduct extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       src: product.image
     })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
       className: "addToCartBtn",
-      type: "submit"
-    }, "Add To Cart"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "$", product.price / 100), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("b", null, "Platform:"), " ", product.platform, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("b", null, "Description:"), " ", product.description, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("b", null, "ESRB:"), " ", product.esrb, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), product.multiplayer ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("b", null, "Supports multiplayer") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("b", null, "Does not support multiplayer"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("b", null, "Metacritic Rating:"), " ", product.rating, "/100", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_NotFound__WEBPACK_IMPORTED_MODULE_3__["default"], null));
+      type: "submit",
+      onClick: this.handleClick
+    }, "Add To Cart"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "$", product.price / 100), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("b", null, "Platform:"), " ", product.platform, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("b", null, "Description:"), " ", product.description, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("b", null, "ESRB:"), " ", product.esrb, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), product.multiplayer ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("b", null, "Supports multiplayer") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("b", null, "Does not support multiplayer"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("b", null, "Metacritic Rating:"), " ", product.rating, "/100", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_NotFound__WEBPACK_IMPORTED_MODULE_4__["default"], null));
   }
 
 }
@@ -3017,13 +3044,16 @@ const mapState = state => {
   };
 };
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch, {
+  history
+}) => {
   return {
-    fetchSingleProduct: id => dispatch((0,_store_singleProduct__WEBPACK_IMPORTED_MODULE_1__.fetchSingleProduct)(id))
+    fetchSingleProduct: id => dispatch((0,_store_singleProduct__WEBPACK_IMPORTED_MODULE_1__.fetchSingleProduct)(id)),
+    addCartItem: product => dispatch((0,_store_cart__WEBPACK_IMPORTED_MODULE_2__.addCartItem)(product, history))
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_2__.connect)(mapState, mapDispatch)(SingleProduct));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_3__.connect)(mapState, mapDispatch)(SingleProduct));
 
 /***/ }),
 
@@ -3143,6 +3173,8 @@ const logout = () => {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "addCartItem": () => (/* binding */ addCartItem),
+/* harmony export */   "addCartProduct": () => (/* binding */ addCartProduct),
 /* harmony export */   "default": () => (/* binding */ cartReducer),
 /* harmony export */   "deleteCartItem": () => (/* binding */ deleteCartItem),
 /* harmony export */   "deleteCartProduct": () => (/* binding */ deleteCartProduct),
@@ -3154,7 +3186,8 @@ __webpack_require__.r(__webpack_exports__);
  // action type
 
 const DELETE_PRODUCT = 'DELETE_PRODUCT';
-const GET_CART = 'GET_CART'; // action creator(s)
+const GET_CART = 'GET_CART';
+const ADD_CART_PRODUCT = 'ADD_CART_PRODUCT'; // action creator(s)
 
 const deleteCartProduct = product => ({
   type: DELETE_PRODUCT,
@@ -3165,17 +3198,34 @@ const getCart = cart => {
     type: GET_CART,
     cart
   };
-}; // thunks
+};
+const addCartProduct = product => ({
+  type: ADD_CART_PRODUCT,
+  product
+}); // thunks
 
-const deleteCartItem = (productId, history) => {
+const deleteCartItem = (userId, productId, history) => {
   return async dispatch => {
     try {
       const {
         data: cartItem
-      } = await axios__WEBPACK_IMPORTED_MODULE_0___default()["delete"](`/api/cart/${productId}`);
+      } = await axios__WEBPACK_IMPORTED_MODULE_0___default()["delete"](`/api/cart/${userId}/${productId}`);
       dispatch(deleteCartProduct(cartItem));
+      history.push(`/cart/${userId}`);
     } catch (err) {
       console.log('error deleting item from cart', err);
+    }
+  };
+};
+const addCartItem = (order, history) => {
+  return async dispatch => {
+    try {
+      const {
+        data: cartItem
+      } = await axios__WEBPACK_IMPORTED_MODULE_0___default().put(`/api/cart/${order.userId}`, order);
+      dispatch(addCartProduct(cartItem));
+    } catch (err) {
+      console.log('error adding item from cart', err);
     }
   };
 };
@@ -3195,6 +3245,9 @@ function cartReducer(state = [], action) {
 
     case GET_CART:
       return action.cart;
+
+    case ADD_CART_PRODUCT:
+      return [...state, action.product];
 
     default:
       return state;
