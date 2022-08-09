@@ -38,8 +38,7 @@ router.get('/:id', async (req, res, next) => {
 
 //add to cart
 
-router.put("/:userId", async (req, res, next) => {
-
+router.put('/:userId', async (req, res, next) => {
   try {
     const userCart = await User.findOne({
       where: {
@@ -57,9 +56,25 @@ router.put("/:userId", async (req, res, next) => {
         },
       ],
     });
+    if (userCart === null) {
+      // no order, so we need to create one and add a product to the order
+      const order = await Order.create({ status: 'open' });
+      // order needs to be associated with user
+      const user = await User.findByPk(req.params.userId);
+      // add this newly opened order to the appropriate user
+      await order.setUser(user);
 
-
-    if (userCart.orders.length) {
+      await Order_Products.create({
+        quantity: req.body.quantity,
+        unit_price: req.body.unit_price,
+        productId: req.body.id,
+        orderId: order.id,
+        // ^ if user doesn't have id, can set the order id based on the id of the recently created order
+      });
+    } else {
+      userCart.orders.length
+        ? console.log('order exists')
+        : console.log('order does not exist');
       const productInCart = await Order_Products.findOne({
         where: {
           //if we have an order in the cart, check if the productId on an order product matches the incoming id
@@ -83,21 +98,6 @@ router.put("/:userId", async (req, res, next) => {
           // ^ if user has an order, can set orderId using the existing order's id here
         });
       }
-    } else {
-      // no order, so we need to create one and add a product to the order
-      const order = await Order.create({ status: "open" });
-      // order needs to be associated with user
-      const user = await User.findByPk(req.params.userId);
-      // add this newly opened order to the appropriate user
-      await order.setUser(user);
-
-      await Order_Products.create({
-        quantity: req.body.quantity,
-        unit_price: req.body.unit_price,
-        productId: req.body.id,
-        orderId: order.id,
-        // ^ if user doesn't have id, can set the order id based on the id of the recently created order
-      });
     }
 
     let productList = userCart.orders[0].products;
@@ -109,7 +109,7 @@ router.put("/:userId", async (req, res, next) => {
 
 // DELETE /api/cart/:userId/:productId
 
-router.delete("/:userId/:productId", async (req, res, next) => {
+router.delete('/:userId/:productId', async (req, res, next) => {
   try {
     const user = await User.findOne({
       where: {
@@ -120,13 +120,13 @@ router.delete("/:userId/:productId", async (req, res, next) => {
           // join it with corresponding open order
           model: Order,
           where: {
-            status: "open",
+            status: 'open',
           },
         },
       ],
     });
     if (!user) {
-      res.sendStatus(404)
+      res.sendStatus(404);
     } else {
       // if user exists - if statement, else - send status 404
       const deletedProduct = await Order_Products.findOne({
