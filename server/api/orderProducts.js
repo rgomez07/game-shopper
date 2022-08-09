@@ -37,11 +37,13 @@ router.get('/:id', async (req, res, next) => {
 });
 
 //add to cart
-router.put('/:id', async (req, res, next) => {
+
+router.put("/:userId", async (req, res, next) => {
+
   try {
     const userCart = await User.findOne({
       where: {
-        id: req.params.id,
+        id: req.params.userId,
       },
       include: [
         {
@@ -56,57 +58,50 @@ router.put('/:id', async (req, res, next) => {
       ],
     });
 
-    let productList = userCart.orders[0].products;
-    //hardcoded 0 for testing
-    let orderProducts = userCart.orders[0].order_product;
-    console.log('ORDER PRODUCTS ------>', orderProducts);
-    console.log('newest cart ---->', userCart.orders);
+
     if (userCart.orders.length) {
-      //find index of user
+      const productInCart = await Order_Products.findOne({
+        where: {
+          //if we have an order in the cart, check if the productId on an order product matches the incoming id
+          productId: req.body.id,
+          orderId: userCart.orders[0].id,
+          // ^ all products in open cart have the same orderId, just need to access the value in some way
+        },
+      });
 
-      //   //we have an add to cart that can only increment by one
-      //   const [orderProducts] = await Order_Products.findAll({
-      //     where: {
-      //       orderId: req.body.orderId,
-      //       productId: req.body.productId,
-      //     },
-      //   });
-      console.log('before', orderProducts);
-      let newQuantity = orderProducts.dataValues.quantity + req.body.quantity;
-      await orderProducts.update({ quantity: newQuantity });
-      //   console.log("this one", orderProducts.dataValues);
+      //if product in cart, add quantity to existing quantity
+      if (productInCart) {
+        let newQuant = productInCart.dataValues.quantity + req.body.quantity;
+        await productInCart.update({ quantity: newQuant });
+      } else {
+        //if product isn't in cart, add new product to cart
+        await Order_Products.create({
+          quantity: req.body.quantity,
+          unit_price: req.body.unit_price,
+          productId: req.body.id,
+          orderId: userCart.orders[0].id,
+          // ^ if user has an order, can set orderId using the existing order's id here
+        });
+      }
+    } else {
+      // no order, so we need to create one and add a product to the order
+      const order = await Order.create({ status: "open" });
+      // order needs to be associated with user
+      const user = await User.findByPk(req.params.userId);
+      // add this newly opened order to the appropriate user
+      await order.setUser(user);
 
-      //   // productList.push({ id: req.body.id, price: req.body.price });
-      //   console.log("after increment", orderProducts.dataValues.quantity);
-      // }
-
-      // if (!userCart) {
-      await Order.create({ status: 'open' });
-
-      // if (userCart.orders.length) {
-      //   orderInCart = userCart.orders[0];
-      //   console.log("order in cart", orderInCart);
-      //   let productIndex = productList.indexOf(req.body.id);
-      //   console.log(
-      //     "unit pricessssssssss",
-      //     productIndex,
-      //     productList[productIndex]
-      //     // .order_product.unit_price
-      //   );
-
-      //   if (productIndex !== -1) {
-      //     userCart.orders[productIndex].quantity =
-      //       productList[productIndex].order_product.quantity + req.body.quantity;
-      //     productList[productIndex].order_product.unit_price = req.body.price;
-      //     productList[productIndex].total =
-      //       productList[productIndex].order_product.quantity * req.body.price;
-      //     productList[productIndex].subtotal = productList[productIndex]
-      //       .map((product) => product.total)
-      //       .reduce((accumulator, current) => accumulator + current);
+      await Order_Products.create({
+        quantity: req.body.quantity,
+        unit_price: req.body.unit_price,
+        productId: req.body.id,
+        orderId: order.id,
+        // ^ if user doesn't have id, can set the order id based on the id of the recently created order
+      });
     }
-    //   // remainder of code goes here
 
-    res.send(req.body);
+    let productList = userCart.orders[0].products;
+    res.send(productList);
   } catch (error) {
     next(error);
   }

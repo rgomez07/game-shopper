@@ -30,7 +30,7 @@ async function seed() {
   ]);
 
   const product = await Promise.all([
-    //PRICE IS IN CENTS TO AVOID CALC ISSUES, FRONTEND WILL DIVIDE BY 100 FOR DISPLAY
+    //price is in cents to avoid calculation issues, the frontend will divide by 100 to display the correct value
     Product.create({
       name: 'Tunic',
       description:
@@ -114,7 +114,7 @@ async function seed() {
       price: 5999,
       esrb: 'Mature',
       image:
-        'https://media.rawg.io/media/games/99e/99e937e4cc518d641317116c9d8d9046.jpg',
+        "https://media.rawg.io/media/games/3ac/3ac2b5356ad764a87092d15cdcbee809.jpg",
       rating: 85,
       multiplayer: 'No',
     }),
@@ -292,8 +292,6 @@ async function seed() {
 
   const order = await Order.create({ status: 'open' });
 
-  // const order_product = await Promise.all([Order_Products.create()]);
-
   const user = await User.findByPk(1);
   await order.setUser(user);
   const product1 = await Product.findByPk(1);
@@ -330,7 +328,6 @@ async function seed() {
       product19: product[18],
       product20: product[19],
     },
-    // order_product1: order_product[0],
     order1: order[0],
   };
 }
