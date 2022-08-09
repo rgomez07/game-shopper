@@ -14,7 +14,7 @@ export class Navbar extends React.Component {
     }
     return (
       <div>
-        <Link to="/home" className="textColor">
+        <Link to="/" className="textColor">
         <h1 className="pageTitle">Game Shopper</h1>
         </Link>
         <nav>
@@ -54,6 +54,9 @@ export class Navbar extends React.Component {
               </Link>
               <Link to="/signup" className="textColor">
                 Sign Up
+              </Link>
+              <Link to="/products" className="textColor">
+                All Products
               </Link>
             </div>
           )}

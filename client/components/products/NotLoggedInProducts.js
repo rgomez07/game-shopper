@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchProducts } from '../../store/products';
-import ListProduct from './ListProduct';
+import NLIListProduct from './NLIListProduct';
 
-export class AllProducts extends React.Component {
+export class NotLoggedInProducts extends React.Component {
   componentDidMount() {
     this.props.fetchProducts();
   }
@@ -17,12 +17,11 @@ export class AllProducts extends React.Component {
           <div id="products" className="list">
             {this.props.products.length ? (
               <div>
-                <h2>Check out these awesome games</h2>
+                <h2>All Fun and Games</h2>
                 {this.props.products.map((product) => (
-                  <ListProduct
+                  <NLIListProduct
                     products={product}
                     key={product.id}
-                    user={this.props.user}
                   />
                 ))}
               </div>
@@ -50,4 +49,4 @@ const mapDispatch = (dispatch) => {
   };
 };
 
-export default connect(mapState, mapDispatch)(AllProducts);
+export default connect(mapState, mapDispatch)(NotLoggedInProducts);

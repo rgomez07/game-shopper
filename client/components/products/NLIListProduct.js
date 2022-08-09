@@ -1,13 +1,12 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
-class ListProduct extends React.Component {
+class NLIListProduct extends React.Component {
   render() {
-    const { products, user } = this.props;
-
+    const { products } = this.props;
     return (
       <div>
-        <Link to={`/products/${products.id}/users/${user.id}`}>
+        <Link to={`/products/${products.id}`}>
           <img src={products.image} />
           <h3 className="allProductViewName">{products.name}</h3>
         </Link>
@@ -16,7 +15,6 @@ class ListProduct extends React.Component {
           Description
         </h4>
         <div className="list-product">{products.description}</div>
-
         <br />
         <hr />
         <br />
@@ -24,4 +22,4 @@ class ListProduct extends React.Component {
     );
   }
 }
-export default ListProduct;
+export default NLIListProduct;
