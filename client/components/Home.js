@@ -7,7 +7,6 @@ import AllProducts from './products/AllProducts';
  */
 export const Home = (props) => {
   const { user } = props;
-  console.log('hereeeee main page props', props);
 
   return (
     <>
