@@ -3126,7 +3126,7 @@ const deleteCartItem = (productId, history) => {
       const {
         data: cartItem
       } = await axios__WEBPACK_IMPORTED_MODULE_0___default()["delete"](`/api/cart/${productId}`);
-      dispatch(_deleteStudent(cartItem));
+      dispatch(deleteCartProduct(cartItem));
     } catch (err) {
       console.log('error deleting item from cart', err);
     }
