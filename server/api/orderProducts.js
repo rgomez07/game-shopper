@@ -1,12 +1,12 @@
-const router = require("express").Router();
+const router = require('express').Router();
 const {
   models: { Product, User, Order },
-} = require("../db");
-const Order_Products = require("../db/models/OrderProduct");
+} = require('../db');
+const Order_Products = require('../db/models/OrderProduct');
 module.exports = router;
 
 //get cart
-router.get("/:id", async (req, res, next) => {
+router.get('/:id', async (req, res, next) => {
   try {
     const userCart = await User.findOne({
       where: {
@@ -17,7 +17,7 @@ router.get("/:id", async (req, res, next) => {
           // join it with corresponding open order
           model: Order,
           where: {
-            status: "open",
+            status: 'open',
           },
           // join it with corresponding product(s)
           include: [Product],
@@ -30,6 +30,25 @@ router.get("/:id", async (req, res, next) => {
       res.send(userCart.orders[0].products);
     } else {
       res.send();
+    }
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.put('/:orderId/checkout', async (req, res, next) => {
+  try {
+    const order = await Order.findByPk(req.params.orderId, {
+      where: {
+        status: 'open',
+      },
+    });
+    console.log('this is the order', order);
+    if (!order) {
+      res.sendStatus(404);
+    } else {
+      await order.update({ status: 'closed' });
+      res.send(order);
     }
   } catch (err) {
     next(err);
@@ -49,7 +68,7 @@ router.put('/:userId', async (req, res, next) => {
           // join it with corresponding open order
           model: Order,
           where: {
-            status: "open",
+            status: 'open',
           },
           // join it with corresponding product(s)
           include: [Product],
@@ -58,7 +77,7 @@ router.put('/:userId', async (req, res, next) => {
     });
     if (userCart === null) {
       // no order, so we need to create one and add a product to the order
-      const newOrder = await Order.create({ status: "open" });
+      const newOrder = await Order.create({ status: 'open' });
       // order needs to be associated with user
       const user = await User.findByPk(req.params.userId);
       // add this newly opened order to the appropriate user
@@ -83,7 +102,7 @@ router.put('/:userId', async (req, res, next) => {
 
       //if product in cart, add quantity to existing quantity
       if (productInCart) {
-        let newQuant = productInCart.dataValues.quantity + req.body.quantity;
+        let newQuant = productInCart.dataValues.quantity + 1;
         await productInCart.update({ quantity: newQuant });
       } else {
         //if product isn't in cart, add new product to cart

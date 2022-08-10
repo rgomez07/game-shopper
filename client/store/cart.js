@@ -1,10 +1,9 @@
 import axios from 'axios';
-
 // action type
 const DELETE_PRODUCT = 'DELETE_PRODUCT';
 const GET_CART = 'GET_CART';
 const ADD_CART_PRODUCT = 'ADD_CART_PRODUCT';
-
+const CART_CHECKOUT = 'CART_CHECKOUT';
 // action creator(s)
 export const deleteCartProduct = (product) => ({
   type: DELETE_PRODUCT,
@@ -20,22 +19,25 @@ export const addCartProduct = (product) => ({
   type: ADD_CART_PRODUCT,
   product,
 });
-
+const cartCheckout = (oldOrder) => ({
+  type: CART_CHECKOUT,
+  oldOrder,
+});
 // thunks
-export const deleteCartItem = (userId, productId, history) => {
+export const deleteCartItem = (orderId, productId, history) => {
   return async (dispatch) => {
     try {
       const { data: cartItem } = await axios.delete(
-        `/api/cart/${userId}/${productId}`
+        `/api/cart/${orderId}/${productId}`
       );
       dispatch(deleteCartProduct(cartItem));
-      history.push(`/cart/${userId}`);
+      history.push(`/users/cart/${orderId}`);
     } catch (err) {
       console.log('error deleting item from cart', err);
     }
   };
 };
-export const addCartItem = (order, history) => {
+export const addCartItem = (order) => {
   return async (dispatch) => {
     try {
       const { data: cartItem } = await axios.put(
@@ -48,23 +50,34 @@ export const addCartItem = (order, history) => {
     }
   };
 };
-
 export const fetchCart = (id) => async (dispatch) => {
   const { data } = await axios.get(`/api/cart/${id}`);
   dispatch(getCart(data));
 };
-
+export const checkOut = (order) => {
+  return async (dispatch) => {
+    try {
+      const { data: oldOrder } = await axios.put(
+        `/api/users/${order}/checkout`
+      );
+      dispatch(cartCheckout(oldOrder));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
 //Reducer
 export default function cartReducer(state = [], action) {
   switch (action.type) {
     case DELETE_PRODUCT:
-      return state.filter((cartProduct) => {
-        return cartProduct.id !== action.product.id;
-      });
+      return action.product.products;
     case GET_CART:
       return action.cart;
     case ADD_CART_PRODUCT:
       return [...state, action.product];
+    case CART_CHECKOUT:
+      return action.oldOrder;
+
     default:
       return state;
   }
