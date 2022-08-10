@@ -30,7 +30,7 @@ export class DisplayCart extends React.Component {
                 <div key={product.id}>
                   <div>{product.name}</div>
                   <div>
-                    Quantity:{' '}
+                    Quantity:
                     {product.order_product.quantity &&
                       product.order_product.quantity}
                   </div>
@@ -52,7 +52,8 @@ export class DisplayCart extends React.Component {
                   </form>
                   <br />
                 </div>
-              ))}{' '}
+              ))}
+
               <button type="submit" onClick={this.handleClick}>
                 Checkout
               </button>
@@ -75,7 +76,7 @@ const mapDispatch = (dispatch, { history }) => {
     fetchCart: (id) => dispatch(fetchCart(id)),
     deleteCartItem: (orderId, productId) =>
       dispatch(deleteCartItem(orderId, productId, history)),
-    checkOut: (id) => dispatch(checkOut(id)),
+    checkOut: (id) => dispatch(checkOut(id, history)),
   };
 };
 export default connect(mapState, mapDispatch)(DisplayCart);

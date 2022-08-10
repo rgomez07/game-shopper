@@ -36,7 +36,7 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
-router.put('/:orderId/checkout', async (req, res, next) => {
+router.put('/users/:orderId/checkout', async (req, res, next) => {
   try {
     const order = await Order.findByPk(req.params.orderId, {
       where: {
@@ -44,11 +44,11 @@ router.put('/:orderId/checkout', async (req, res, next) => {
       },
     });
     console.log('this is the order', order);
-    if (!order) {
-      res.sendStatus(404);
-    } else {
+    if (order) {
       await order.update({ status: 'closed' });
       res.send(order);
+    } else {
+      res.sendStatus(404);
     }
   } catch (err) {
     next(err);

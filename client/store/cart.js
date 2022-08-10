@@ -40,6 +40,7 @@ export const deleteCartItem = (orderId, productId, history) => {
 export const addCartItem = (order) => {
   return async (dispatch) => {
     try {
+      console.log('herrre orderuserid', order);
       const { data: cartItem } = await axios.put(
         `/api/cart/${order.userId}`,
         order
@@ -54,13 +55,16 @@ export const fetchCart = (id) => async (dispatch) => {
   const { data } = await axios.get(`/api/cart/${id}`);
   dispatch(getCart(data));
 };
-export const checkOut = (order) => {
+
+export const checkOut = (order, history) => {
   return async (dispatch) => {
     try {
+      console.log('here', order);
       const { data: oldOrder } = await axios.put(
-        `/api/users/${order}/checkout`
+        `/api/cart/users/${order}/checkout`
       );
       dispatch(cartCheckout(oldOrder));
+      history.push(`/Checkout`);
     } catch (error) {
       console.log(error);
     }
