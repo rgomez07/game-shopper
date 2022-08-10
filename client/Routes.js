@@ -7,6 +7,7 @@ import SingleProduct from './components/singleProducts/SingleProduct';
 import Cart from './components/Cart';
 import Signup from './components/SignUp';
 import Login from './components/Login';
+import Checkout from './components/Checkout';
 import Home from './components/Home';
 import { me } from './store';
 import UserProfile from './components/Users/UserProfile';
@@ -39,6 +40,7 @@ class Routes extends Component {
               component={SingleProduct}
             />
             <Route exact path="/users/cart/:id" component={Cart} />
+            <Route exact path="/checkout" component={Checkout} />
           </Switch>
         ) : (
           <Switch>
@@ -48,6 +50,7 @@ class Routes extends Component {
             <Route exact path="/products" component={NotLoggedInProducts} />
             <Route exact path="/products/:id" component={NLISingleProduct} />
             <Route exact path="/cart/:id" component={Cart} />
+            <Route path="/checkout" component={Checkout} />
           </Switch>
         )}
       </div>
