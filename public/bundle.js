@@ -2261,7 +2261,7 @@ class DisplayCart extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       className: "list"
     }, userCart.length ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Your Cart is:"), userCart.map(product => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
       key: product.id
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, product.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Quantity:", ' ', product.order_product.quantity && product.order_product.quantity), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, product.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Quantity:", product.order_product.quantity && product.order_product.quantity), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
       className: "",
       src: product.image
     }), console.log(product), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
@@ -2270,7 +2270,7 @@ class DisplayCart extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       type: "submit",
       className: "remove",
       onClick: () => this.props.deleteCartItem(product.order_product.orderId, product.order_product.productId)
-    }, "Delete")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null))), ' ', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+    }, "Delete")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
       type: "submit",
       onClick: this.handleClick
     }, "Checkout")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", {
@@ -2292,7 +2292,7 @@ const mapDispatch = (dispatch, {
   return {
     fetchCart: id => dispatch((0,_store_cart__WEBPACK_IMPORTED_MODULE_1__.fetchCart)(id)),
     deleteCartItem: (orderId, productId) => dispatch((0,_store_cart__WEBPACK_IMPORTED_MODULE_1__.deleteCartItem)(orderId, productId, history)),
-    checkOut: id => dispatch((0,_store_cart__WEBPACK_IMPORTED_MODULE_1__.checkOut)(id))
+    checkOut: id => dispatch((0,_store_cart__WEBPACK_IMPORTED_MODULE_1__.checkOut)(id, history))
   };
 };
 
@@ -3460,6 +3460,7 @@ const deleteCartItem = (orderId, productId, history) => {
 const addCartItem = order => {
   return async dispatch => {
     try {
+      console.log('herrre orderuserid', order);
       const {
         data: cartItem
       } = await axios__WEBPACK_IMPORTED_MODULE_0___default().put(`/api/cart/${order.userId}`, order);
@@ -3475,13 +3476,15 @@ const fetchCart = id => async dispatch => {
   } = await axios__WEBPACK_IMPORTED_MODULE_0___default().get(`/api/cart/${id}`);
   dispatch(getCart(data));
 };
-const checkOut = order => {
+const checkOut = (order, history) => {
   return async dispatch => {
     try {
+      console.log('here', order);
       const {
         data: oldOrder
-      } = await axios__WEBPACK_IMPORTED_MODULE_0___default().put(`/api/users/${order}/checkout`);
+      } = await axios__WEBPACK_IMPORTED_MODULE_0___default().put(`/api/cart/users/${order}/checkout`);
       dispatch(cartCheckout(oldOrder));
+      history.push(`/Checkout`);
     } catch (error) {
       console.log(error);
     }
