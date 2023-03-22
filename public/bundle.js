@@ -3064,10 +3064,13 @@ class NLIListProduct extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     const {
       products
     } = this.props;
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "NLIcontainer"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
       to: `/products/${products.id}`
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
-      src: products.image
+      src: products.image,
+      className: "gamePics"
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", {
       className: "allProductViewName"
     }, products.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", {
@@ -3076,8 +3079,8 @@ class NLIListProduct extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       id: "description",
       className: "list-product"
     }, "Description"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-      className: "list-product"
-    }, products.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("hr", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null));
+      className: "description"
+    }, products.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null));
   }
 
 }
@@ -3122,10 +3125,12 @@ class NotLoggedInProducts extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "products",
         className: "list"
-      }, this.props.products.length ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "All Fun and Games"), this.props.products.map(product => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_NLIListProduct__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      }, this.props.products.length ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "All Fun and Games"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "NLIList"
+      }, this.props.products.map(product => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_NLIListProduct__WEBPACK_IMPORTED_MODULE_3__["default"], {
         products: product,
         key: product.id
-      }))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", {
+      })))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", {
         className: "textColor"
       }, "there are no games to display currently")));
     }

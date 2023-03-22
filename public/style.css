@@ -85,12 +85,42 @@ img {
   
   color: #fcfeff;
 } 
+.NLIList {
+  
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
+ 
+} 
+.NLIcontainer{
+  flex: 1 0 30%;
+  height: 300px;
+  width: 350px;
+
+  background-color: #2b2727;
+  margin: 5px;
+}
+.description{
+  padding: 10px;
+  width: 75%;
+  color: #fcfeff;
+}
+.gamePics{
+  width: 20%;
+  height: 40%;
+  float: right;
+ 
+ 
+}
 
 /* .allProductViewName{
   display: inline-block;
 }      fixes the box to inline block but changes the positioning*/
 .allProductViewName{
   color: #fcfeff;
+  padding: 10px;
+  align-self: center;
 }
 .allProductViewName:hover{
   
