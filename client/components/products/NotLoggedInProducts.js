@@ -14,22 +14,20 @@ export class NotLoggedInProducts extends React.Component {
     } else {
       return (
         <div className='textColor'>
-          <div id='products' className='list'>
-            {this.props.products.length ? (
-              <div>
-                <h2>All Fun and Games</h2>
-                <div className='NLIList'>
-                  {this.props.products.map((product) => (
-                    <NLIListProduct products={product} key={product.id} />
-                  ))}
-                </div>
+          {this.props.products.length ? (
+            <div className='NLITitle'>
+              <h2>All Fun and Games</h2>
+              <div className='outerDiv'>
+                {this.props.products.map((product) => (
+                  <NLIListProduct products={product} key={product.id} />
+                ))}
               </div>
-            ) : (
-              <h2 className='textColor'>
-                there are no games to display currently
-              </h2>
-            )}
-          </div>
+            </div>
+          ) : (
+            <h2 className='textColor'>
+              there are no games to display currently
+            </h2>
+          )}
         </div>
       );
     }

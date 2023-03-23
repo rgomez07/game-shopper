@@ -24,11 +24,6 @@ form div {
   display: inline-block;
 }
 
-img {
-  width: 320px;
-  height: 200px
-}
-
 .list-product {
   flex: 1;
   width: 100%;
@@ -85,42 +80,83 @@ img {
   
   color: #fcfeff;
 } 
-.NLIList {
+/* .NLIList {
   
   display: flex;
   flex-wrap: wrap;
   width: 100%;
   height: 100%;
  
-} 
+}  */
+.NLITitle{
+  align-content: center;
+}
+.outerDiv{
+  border: solid 2px pink;
+  width: 100%;
+  height: 100%;
+  padding: 40px;
+  display:flex;
+  /* flex-direction:column; */
+  flex-wrap:wrap;
+  justify-content: space-between;
+}
 .NLIcontainer{
-  flex: 1 0 30%;
-  height: 300px;
-  width: 350px;
+  /* flex-direction: row; */
+  /* height: 400px;
+  width: 350px; */
+  /* height: 100%;*/
 
+  width: 30%; 
+  height: 60%;
   background-color: #2b2727;
-  margin: 5px;
+  /* flex-direction: row; */
+  border-radius: 25px;
+  /* border-top-left-radius: 25px; */
+  /* border: solid 2px red; */
+  margin-bottom: 5%;
+}
+
+.bottomInnerBox{
+  /* padding: 20px; */
+  color: #fcfeff;
+  height: 300px;
+  text-align: center;
+  /* border: solid 2px pink */
+}
+.upperInnerBox{
+  /* display: flex;
+  justify-content: center;
+  padding-left: 65px;
+  padding-top: 50px; */
+  /* width: 100%; */
+  /* height: 90px; */
+  /* border: solid 2px rgb(82, 246, 11); */
+  height: 60%;
+} 
+img {
+  width:100%;
+  height: 300px;
+  border-radius: 25px;
+}
+.title{
+  height: 15%;
+  /* border: solid 2px yellow; */
 }
 .description{
-  padding: 10px;
-  width: 75%;
-  color: #fcfeff;
+  height: 60%;
+  /* border: solid 2px yellow; */
 }
-.gamePics{
-  width: 20%;
-  height: 40%;
-  float: right;
- 
- 
+.price{
+  height: 15%;
+  /* border: solid 2px yellow; */
 }
 
-/* .allProductViewName{
-  display: inline-block;
-}      fixes the box to inline block but changes the positioning*/
 .allProductViewName{
   color: #fcfeff;
-  padding: 10px;
-  align-self: center;
+  margin-top: 15px;
+  text-align: center;
+
 }
 .allProductViewName:hover{
   

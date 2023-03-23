@@ -14,34 +14,32 @@ export class Navbar extends React.Component {
     }
     return (
       <div>
-        <Link to="/" className="textColor">
-        <h1 className="pageTitle">Game Shopper</h1>
+        <Link to='/' className='textColor'>
+          <h1 className='pageTitle'>Game Shopper</h1>
         </Link>
         <nav>
           {this.props.isLoggedIn ? (
             <div>
               {/* The navbar will show these links after you log in */}
-              <Link to="/home" className="textColor">
+              <Link to='/home' className='textColor'>
                 Home
               </Link>
               <a
-                href="#"
+                href='#'
                 onClick={this.props.handleClick}
-                className="textColor"
+                className='textColor'
               >
                 Logout
               </a>
               <Link
                 to={`/users/cart/${this.props.id}`}
-                className="cartTextColor"
+                className='cartTextColor'
               >
                 <FiShoppingCart />
               </Link>
-              <Link to={`/users/${this.props.id}/profile`}>
-                Profile
-              </Link>
+              <Link to={`/users/${this.props.id}/profile`}>Profile</Link>
               {this.props.userType === 'Admin' ? (
-                <Link to="/users" className="textColor">
+                <Link to='/users' className='textColor'>
                   Users
                 </Link>
               ) : null}
@@ -49,13 +47,13 @@ export class Navbar extends React.Component {
           ) : (
             <div>
               {/* The navbar will show these links before you log in */}
-              <Link to="/login" className="textColor">
+              <Link to='/login' className='textColor'>
                 Login
               </Link>
-              <Link to="/signup" className="textColor">
+              <Link to='/signup' className='textColor'>
                 Sign Up
               </Link>
-              <Link to="/products" className="textColor">
+              <Link to='/products' className='textColor'>
                 All Products
               </Link>
             </div>
