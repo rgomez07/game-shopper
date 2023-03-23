@@ -6,20 +6,26 @@ class ListProduct extends React.Component {
     const { products, user } = this.props;
 
     return (
-      <div>
-        <Link to={`/products/${products.id}/users/${user.id}`}>
-          <img src={products.image} />
-          <h3 className="allProductViewName">{products.name}</h3>
-        </Link>
-        <h4 className="list-product">${products.price / 100}</h4>
-        <h4 id="description" className="list-product">
-          Description
-        </h4>
-        <div className="list-product">{products.description}</div>
-
-        <br />
-        <hr />
-        <br />
+      <div className='NLIcontainer'>
+        <div className='upperInnerBox'>
+          <Link to={`/products/${products.id}/users/${user.id}`}>
+            <img src={products.image} />
+          </Link>
+        </div>
+        <div className='bottomInnerBox'>
+          <div>
+            <Link to={`/products/${products.id}/users/${user.id}`}>
+              <span className='title'>{products.name}</span>
+            </Link>
+          </div>
+          <div className='description'>
+            <h4>Description</h4>
+            {products.description}
+          </div>
+          <div className='price'>
+            <h4>${products.price / 100}</h4>
+          </div>
+        </div>
       </div>
     );
   }

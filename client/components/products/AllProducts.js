@@ -10,14 +10,14 @@ export class AllProducts extends React.Component {
 
   render(error) {
     if (error) {
-      return <h3 className="textColor">No products available at this time</h3>;
+      return <h3 className='textColor'>No products available at this time</h3>;
     } else {
       return (
-        <div className="textColor">
-          <div id="products" className="list">
-            {this.props.products.length ? (
-              <div>
-                <h2>Check out these awesome games</h2>
+        <div className='textColor'>
+          {this.props.products.length ? (
+            <div classname='NLITitle'>
+              <h2>Check out these awesome games</h2>
+              <div className='outerDiv'>
                 {this.props.products.map((product) => (
                   <ListProduct
                     products={product}
@@ -26,12 +26,12 @@ export class AllProducts extends React.Component {
                   />
                 ))}
               </div>
-            ) : (
-              <h2 className="textColor">
-                there are no games to display currently
-              </h2>
-            )}
-          </div>
+            </div>
+          ) : (
+            <h2 className='textColor'>
+              there are no games to display currently
+            </h2>
+          )}
         </div>
       );
     }

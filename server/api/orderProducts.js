@@ -43,7 +43,7 @@ router.put('/users/:orderId/checkout', async (req, res, next) => {
         status: 'open',
       },
     });
-    console.log('this is the order', order);
+    //console.log('this is the order', order);
     if (order) {
       await order.update({ status: 'closed' });
       res.send(order);

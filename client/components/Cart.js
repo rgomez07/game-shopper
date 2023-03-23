@@ -21,11 +21,12 @@ export class DisplayCart extends React.Component {
     const userCart = this.props.cart;
     console.log('heeerrree----', this.props);
     return (
-      <div className="textColor">
-        <div id="products" className="list">
+      <div className='textColor'>
+        <div id='products' className='list'>
           {userCart.length ? (
             <div>
               <h2>Your Cart is:</h2>
+
               {userCart.map((product) => (
                 <div key={product.id}>
                   <div>{product.name}</div>
@@ -34,12 +35,12 @@ export class DisplayCart extends React.Component {
                     {product.order_product.quantity &&
                       product.order_product.quantity}
                   </div>
-                  <img className="" src={product.image} />
-                  {console.log(product)}
+                  <img className='' src={product.image} />
+                  {/* {console.log(product)} */}
                   <form onSubmit={(event) => event.preventDefault()}>
                     <button
-                      type="submit"
-                      className="remove"
+                      type='submit'
+                      className='remove'
                       onClick={() =>
                         this.props.deleteCartItem(
                           product.order_product.orderId,
@@ -53,13 +54,12 @@ export class DisplayCart extends React.Component {
                   <br />
                 </div>
               ))}
-
-              <button type="submit" onClick={this.handleClick}>
+              <button type='submit' onClick={this.handleClick}>
                 Checkout
               </button>
             </div>
           ) : (
-            <h2 className="textColor">Your Cart is empty</h2>
+            <h2 className='textColor'>Your Cart is empty</h2>
           )}
         </div>
       </div>
