@@ -141,6 +141,8 @@ img {
 }
 .title{
   height: 15%;
+  margin-top: 20px;
+  color: white;
   /* border: solid 2px yellow; */
 }
 .description{

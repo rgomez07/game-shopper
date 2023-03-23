@@ -114,7 +114,7 @@ async function seed() {
       price: 5999,
       esrb: 'Mature',
       image:
-        "https://media.rawg.io/media/games/3ac/3ac2b5356ad764a87092d15cdcbee809.jpg",
+        'https://media.rawg.io/media/games/3ac/3ac2b5356ad764a87092d15cdcbee809.jpg',
       rating: 85,
       multiplayer: 'No',
     }),
@@ -288,6 +288,20 @@ async function seed() {
       rating: 81,
       multiplayer: 'No',
     }),
+
+    // -------New game------
+    Product.create({
+      name: 'Hogwarts Legacy',
+      description:
+        'Experience Hogwarts in the 1800s. Your character is a student who holds the key to an ancient secret that threatens to tear the wizarding world apart. You have received a late acceptance to the Hogwarts School of Witchcraft and Wizardry and soon discover that you are no ordinary student.',
+      platform: 'PC, PlayStation 5 Xbox One, Nintendo Switch',
+      esrb: 'Not rated',
+      genre: 'Adventure, Action, RPG',
+      price: 6999,
+      image: 'https://images8.alphacoders.com/130/1303125.jpg',
+      rating: 83,
+      multiplayer: 'No',
+    }),
   ]);
 
   const order = await Order.create({ status: 'open' });
@@ -327,6 +341,7 @@ async function seed() {
       product18: product[17],
       product19: product[18],
       product20: product[19],
+      product21: product[20],
     },
     order1: order[0],
   };

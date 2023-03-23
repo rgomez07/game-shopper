@@ -13,8 +13,10 @@ class NLIListProduct extends React.Component {
         </div>
 
         <div className='bottomInnerBox'>
-          <div className='title'>
-            <span>{products.name}</span>
+          <div>
+            <Link to={`/products/${products.id}`}>
+              <span className='title'> {products.name}</span>
+            </Link>
           </div>
 
           <div className='description'>
