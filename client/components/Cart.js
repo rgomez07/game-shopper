@@ -17,6 +17,10 @@ export class DisplayCart extends React.Component {
     evt.preventDefault();
     this.props.checkOut(this.props.match.params.id);
   }
+  handleSubmit(evt) {
+    evt.preventDefault();
+    this.props.checkOut(this.props.match.params.id);
+  }
   render() {
     const userCart = this.props.cart;
     console.log('heeerrree----', this.props);
@@ -32,8 +36,7 @@ export class DisplayCart extends React.Component {
                   <div>{product.name}</div>
                   <div>
                     Quantity:
-                    {product.order_product.quantity &&
-                      product.order_product.quantity}
+                    {product.order_product?.quantity}
                   </div>
                   <img className='' src={product.image} />
                   {/* {console.log(product)} */}
@@ -54,7 +57,7 @@ export class DisplayCart extends React.Component {
                   <br />
                 </div>
               ))}
-              <button type='submit' onClick={this.handleClick}>
+              <button type='submit' onClick={this.handleSubmit}>
                 Checkout
               </button>
             </div>

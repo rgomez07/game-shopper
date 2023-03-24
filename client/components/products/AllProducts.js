@@ -15,7 +15,7 @@ export class AllProducts extends React.Component {
       return (
         <div className='textColor'>
           {this.props.products.length ? (
-            <div classname='NLITitle'>
+            <div className='NLITitle'>
               <h2>Check out these awesome games</h2>
               <div className='outerDiv'>
                 {this.props.products.map((product) => (

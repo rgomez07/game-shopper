@@ -23,6 +23,9 @@ class SingleProduct extends React.Component {
   handleClick(evt) {
     evt.preventDefault();
     this.props.addCartItem(this.state);
+    setTimeout(() => {
+      alert('Product added to cart!');
+    }, 100);
     console.log('this.state in single product', this.state);
   }
 
@@ -31,14 +34,14 @@ class SingleProduct extends React.Component {
     return (
       <div>
         {product.name ? (
-          <div className="textColor">
+          <div className='textColor'>
             <h2>{product.name}</h2>
             <div>
               <img src={product.image} />
             </div>
             <button
-              className="addToCartBtn"
-              type="submit"
+              className='addToCartBtn'
+              type='submit'
               onClick={this.handleClick}
             >
               Add To Cart

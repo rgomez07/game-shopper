@@ -31,7 +31,8 @@ export const deleteCartItem = (orderId, productId, history) => {
         `/api/cart/${orderId}/${productId}`
       );
       dispatch(deleteCartProduct(cartItem));
-      history.push(`/users/cart/${orderId}`);
+      //history.push(`/users/cart/${orderId}`);
+      dispatch(fetchCart(orderId));
     } catch (err) {
       console.log('error deleting item from cart', err);
     }

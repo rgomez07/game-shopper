@@ -2251,6 +2251,11 @@ class DisplayCart extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     this.props.checkOut(this.props.match.params.id);
   }
 
+  handleSubmit(evt) {
+    evt.preventDefault();
+    this.props.checkOut(this.props.match.params.id);
+  }
+
   render() {
     const userCart = this.props.cart;
     console.log('heeerrree----', this.props);
@@ -2261,7 +2266,7 @@ class DisplayCart extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       className: "list"
     }, userCart.length ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Your Cart is:"), userCart.map(product => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
       key: product.id
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, product.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Quantity:", product.order_product.quantity && product.order_product.quantity), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, product.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Quantity:", product.order_product?.quantity), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
       className: "",
       src: product.image
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
@@ -2272,7 +2277,7 @@ class DisplayCart extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       onClick: () => this.props.deleteCartItem(product.order_product.orderId, product.order_product.productId)
     }, "Delete")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
       type: "submit",
-      onClick: this.handleClick
+      onClick: this.handleSubmit
     }, "Checkout")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", {
       className: "textColor"
     }, "Your Cart is empty")));
@@ -2498,7 +2503,7 @@ class Navbar extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       console.log('NAVBAR PROPS -->', this.props.userType);
     }
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
-      to: "/",
+      to: "/home",
       className: "textColor"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
       className: "pageTitle"
@@ -2513,7 +2518,8 @@ class Navbar extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       to: `/users/cart/${this.props.id}`,
       className: "cartTextColor"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_5__.FiShoppingCart, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
-      to: `/users/${this.props.id}/profile`
+      to: `/users/${this.props.id}/profile`,
+      className: "pageTitle"
     }, "Profile"), this.props.userType === 'Admin' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
       to: "/users",
       className: "textColor"
@@ -2969,7 +2975,7 @@ class AllProducts extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "textColor"
       }, this.props.products.length ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        classname: "NLITitle"
+        className: "NLITitle"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Check out these awesome games"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "outerDiv"
       }, this.props.products.map(product => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ListProduct__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -3264,6 +3270,9 @@ class SingleProduct extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   handleClick(evt) {
     evt.preventDefault();
     this.props.addCartItem(this.state);
+    setTimeout(() => {
+      alert('Product added to cart!');
+    }, 100);
     console.log('this.state in single product', this.state);
   }
 
@@ -3462,8 +3471,9 @@ const deleteCartItem = (orderId, productId, history) => {
       const {
         data: cartItem
       } = await axios__WEBPACK_IMPORTED_MODULE_0___default()["delete"](`/api/cart/${orderId}/${productId}`);
-      dispatch(deleteCartProduct(cartItem));
-      history.push(`/users/cart/${orderId}`);
+      dispatch(deleteCartProduct(cartItem)); //history.push(`/users/cart/${orderId}`);
+
+      dispatch(fetchCart(orderId));
     } catch (err) {
       console.log('error deleting item from cart', err);
     }

@@ -14,7 +14,7 @@ export class Navbar extends React.Component {
     }
     return (
       <div>
-        <Link to='/' className='textColor'>
+        <Link to='/home' className='textColor'>
           <h1 className='pageTitle'>Game Shopper</h1>
         </Link>
         <nav>
@@ -37,7 +37,12 @@ export class Navbar extends React.Component {
               >
                 <FiShoppingCart />
               </Link>
-              <Link to={`/users/${this.props.id}/profile`}>Profile</Link>
+              <Link
+                to={`/users/${this.props.id}/profile`}
+                className='pageTitle'
+              >
+                Profile
+              </Link>
               {this.props.userType === 'Admin' ? (
                 <Link to='/users' className='textColor'>
                   Users
