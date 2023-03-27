@@ -141,6 +141,7 @@ router.delete('/:userId/:productId', async (req, res, next) => {
         },
       ],
     });
+
     if (!user) {
       res.sendStatus(404);
     } else {

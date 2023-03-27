@@ -24,14 +24,13 @@ const cartCheckout = (oldOrder) => ({
   oldOrder,
 });
 // thunks
-export const deleteCartItem = (orderId, productId, history) => {
+export const deleteCartItem = (orderId, productId) => {
   return async (dispatch) => {
     try {
       const { data: cartItem } = await axios.delete(
         `/api/cart/${orderId}/${productId}`
       );
       dispatch(deleteCartProduct(cartItem));
-      //history.push(`/users/cart/${orderId}`);
       dispatch(fetchCart(orderId));
     } catch (err) {
       console.log('error deleting item from cart', err);
@@ -74,8 +73,20 @@ export const checkOut = (order, history) => {
 //Reducer
 export default function cartReducer(state = [], action) {
   switch (action.type) {
-    case DELETE_PRODUCT:
-      return action.product.products;
+    // case DELETE_PRODUCT:
+    //   return action.product.products;
+    case 'DELETE_PRODUCT':
+      // find the index of the product to delete
+      const index = state.findIndex(
+        (product) => product.id === action.product.productId
+      );
+      // if the product is not found, return the previous state
+      if (index === -1) {
+        return state;
+      }
+      const newState = [...state];
+      newState.splice(index, 1);
+      return newState;
     case GET_CART:
       return action.cart;
     case ADD_CART_PRODUCT:

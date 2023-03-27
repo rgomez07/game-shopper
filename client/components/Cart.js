@@ -6,16 +6,27 @@ export class DisplayCart extends React.Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
     this.props.fetchCart(this.props.match.params.id);
-    //console.log(‘this is this.props’, this.props)
+    console.log('this is this.props', this.props);
   }
 
-  handleClick(evt) {
+  handleClick(evt, product) {
     evt.preventDefault();
-    this.props.checkOut(this.props.match.params.id);
+    this.props.deleteCartItem(
+      product.order_product.orderId,
+      product.order_product.productId
+
+      // console.log(
+      //   'AYYYYY-----',
+      //   product.order_product.orderId,
+      //   product.order_product.productId
+      // )
+    );
+    window.location.reload();
   }
   handleSubmit(evt) {
     evt.preventDefault();
@@ -23,7 +34,7 @@ export class DisplayCart extends React.Component {
   }
   render() {
     const userCart = this.props.cart;
-    console.log('heeerrree----', this.props);
+
     return (
       <div className='textColor'>
         <div id='products' className='list'>
@@ -39,17 +50,12 @@ export class DisplayCart extends React.Component {
                     {product.order_product?.quantity}
                   </div>
                   <img className='' src={product.image} />
-                  {/* {console.log(product)} */}
+
                   <form onSubmit={(event) => event.preventDefault()}>
                     <button
                       type='submit'
                       className='remove'
-                      onClick={() =>
-                        this.props.deleteCartItem(
-                          product.order_product.orderId,
-                          product.order_product.productId
-                        )
-                      }
+                      onClick={(event) => this.handleClick(event, product)}
                     >
                       Delete
                     </button>

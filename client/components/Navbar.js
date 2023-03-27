@@ -9,9 +9,6 @@ export class Navbar extends React.Component {
     this.props.current(), this.props.handleClick();
   }
   render() {
-    {
-      console.log('NAVBAR PROPS -->', this.props.userType);
-    }
     return (
       <div>
         <Link to='/home' className='textColor'>

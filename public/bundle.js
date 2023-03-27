@@ -2240,15 +2240,23 @@ class DisplayCart extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
-    this.props.fetchCart(this.props.match.params.id); //console.log(‘this is this.props’, this.props)
+    this.props.fetchCart(this.props.match.params.id);
+    console.log('this is this.props', this.props);
   }
 
-  handleClick(evt) {
+  handleClick(evt, product) {
     evt.preventDefault();
-    this.props.checkOut(this.props.match.params.id);
+    this.props.deleteCartItem(product.order_product.orderId, product.order_product.productId // console.log(
+    //   'AYYYYY-----',
+    //   product.order_product.orderId,
+    //   product.order_product.productId
+    // )
+    );
+    window.location.reload();
   }
 
   handleSubmit(evt) {
@@ -2258,7 +2266,6 @@ class DisplayCart extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
 
   render() {
     const userCart = this.props.cart;
-    console.log('heeerrree----', this.props);
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
       className: "textColor"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -2274,7 +2281,7 @@ class DisplayCart extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
       type: "submit",
       className: "remove",
-      onClick: () => this.props.deleteCartItem(product.order_product.orderId, product.order_product.productId)
+      onClick: event => this.handleClick(event, product)
     }, "Delete")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
       type: "submit",
       onClick: this.handleSubmit
@@ -2499,9 +2506,6 @@ class Navbar extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   }
 
   render() {
-    {
-      console.log('NAVBAR PROPS -->', this.props.userType);
-    }
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
       to: "/home",
       className: "textColor"
@@ -3465,14 +3469,13 @@ const cartCheckout = oldOrder => ({
 }); // thunks
 
 
-const deleteCartItem = (orderId, productId, history) => {
+const deleteCartItem = (orderId, productId) => {
   return async dispatch => {
     try {
       const {
         data: cartItem
       } = await axios__WEBPACK_IMPORTED_MODULE_0___default()["delete"](`/api/cart/${orderId}/${productId}`);
-      dispatch(deleteCartProduct(cartItem)); //history.push(`/users/cart/${orderId}`);
-
+      dispatch(deleteCartProduct(cartItem));
       dispatch(fetchCart(orderId));
     } catch (err) {
       console.log('error deleting item from cart', err);
@@ -3515,8 +3518,19 @@ const checkOut = (order, history) => {
 
 function cartReducer(state = [], action) {
   switch (action.type) {
-    case DELETE_PRODUCT:
-      return action.product.products;
+    // case DELETE_PRODUCT:
+    //   return action.product.products;
+    case 'DELETE_PRODUCT':
+      // find the index of the product to delete
+      const index = state.findIndex(product => product.id === action.product.productId); // if the product is not found, return the previous state
+
+      if (index === -1) {
+        return state;
+      }
+
+      const newState = [...state];
+      newState.splice(index, 1);
+      return newState;
 
     case GET_CART:
       return action.cart;
