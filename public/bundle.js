@@ -2954,59 +2954,96 @@ const mapDispatch = (dispatch, {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "AllProducts": () => (/* binding */ AllProducts),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _store_products__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../store/products */ "./client/store/products.js");
 /* harmony import */ var _ListProduct__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ListProduct */ "./client/components/products/ListProduct.js");
+// import React from 'react';
+// import { connect } from 'react-redux';
+// import { fetchProducts } from '../../store/products';
+// import ListProduct from './ListProduct';
+// export class AllProducts extends React.Component {
+//   componentDidMount() {
+//     this.props.fetchProducts();
+//   }
+//   render(error) {
+//     if (error) {
+//       return <h3 className='textColor'>No products available at this time</h3>;
+//     } else {
+//       return (
+//         <div className='textColor'>
+//           {this.props.products.length ? (
+//             <div className='NLITitle'>
+//               <h2>Check out these awesome games</h2>
+//               <div className='outerDiv'>
+//                 {this.props.products.map((product) => (
+//                   <ListProduct
+//                     products={product}
+//                     key={product.id}
+//                     user={this.props.user}
+//                   />
+//                 ))}
+//               </div>
+//             </div>
+//           ) : (
+//             <h2 className='textColor'>
+//               there are no games to display currently
+//             </h2>
+//           )}
+//         </div>
+//       );
+//     }
+//   }
+// }
+// const mapState = (state) => {
+//   return {
+//     products: state.productsReducer,
+//   };
+// };
+// const mapDispatch = (dispatch) => {
+//   return {
+//     fetchProducts: () => dispatch(fetchProducts()),
+//   };
+// };
+// export default connect(mapState, mapDispatch)(AllProducts);
+//React Hooks---------------------------------
 
 
 
 
-class AllProducts extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
-  componentDidMount() {
-    this.props.fetchProducts();
+
+function AllProducts(props) {
+  const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
+  const products = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state.productsReducer);
+  const error = false;
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    dispatch((0,_store_products__WEBPACK_IMPORTED_MODULE_2__.fetchProducts)());
+  }, [dispatch]);
+
+  if (error) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", {
+      className: "textColor"
+    }, "No products available at this time");
+  } else {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "textColor"
+    }, products.length ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "NLITitle"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Check out these awesome games"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "outerDiv"
+    }, products.map(product => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ListProduct__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      products: product,
+      key: product.id,
+      user: props.user
+    })))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", {
+      className: "textColor"
+    }, "there are no games to display currently"));
   }
-
-  render(error) {
-    if (error) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", {
-        className: "textColor"
-      }, "No products available at this time");
-    } else {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "textColor"
-      }, this.props.products.length ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "NLITitle"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Check out these awesome games"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "outerDiv"
-      }, this.props.products.map(product => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ListProduct__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        products: product,
-        key: product.id,
-        user: this.props.user
-      })))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", {
-        className: "textColor"
-      }, "there are no games to display currently"));
-    }
-  }
-
 }
 
-const mapState = state => {
-  return {
-    products: state.productsReducer
-  };
-};
-
-const mapDispatch = dispatch => {
-  return {
-    fetchProducts: () => dispatch((0,_store_products__WEBPACK_IMPORTED_MODULE_2__.fetchProducts)())
-  };
-};
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapState, mapDispatch)(AllProducts));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AllProducts);
 
 /***/ }),
 
@@ -3116,58 +3153,91 @@ class NLIListProduct extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NotLoggedInProducts": () => (/* binding */ NotLoggedInProducts),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _store_products__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../store/products */ "./client/store/products.js");
 /* harmony import */ var _NLIListProduct__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./NLIListProduct */ "./client/components/products/NLIListProduct.js");
+// import React from 'react';
+// import { connect } from 'react-redux';
+// import { fetchProducts } from '../../store/products';
+// import NLIListProduct from './NLIListProduct';
+// export class NotLoggedInProducts extends React.Component {
+//   componentDidMount() {
+//     this.props.fetchProducts();
+//   }
+//   render(error) {
+//     if (error) {
+//       return <h3 className='textColor'>No products available at this time</h3>;
+//     } else {
+//       return (
+//         <div className='textColor'>
+//           {this.props.products.length ? (
+//             <div className='NLITitle'>
+//               <h2>All Fun and Games</h2>
+//               <div className='outerDiv'>
+//                 {this.props.products.map((product) => (
+//                   <NLIListProduct products={product} key={product.id} />
+//                 ))}
+//               </div>
+//             </div>
+//           ) : (
+//             <h2 className='textColor'>
+//               there are no games to display currently
+//             </h2>
+//           )}
+//         </div>
+//       );
+//     }
+//   }
+// }
+// const mapState = (state) => {
+//   return {
+//     products: state.productsReducer,
+//   };
+// };
+// const mapDispatch = (dispatch) => {
+//   return {
+//     fetchProducts: () => dispatch(fetchProducts()),
+//   };
+// };
+// export default connect(mapState, mapDispatch)(NotLoggedInProducts);
+//React Hooks-----------------------------------
 
 
 
 
-class NotLoggedInProducts extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
-  componentDidMount() {
-    this.props.fetchProducts();
+
+function NotLoggedInProducts() {
+  const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
+  const products = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state.productsReducer);
+  const error = false;
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    dispatch((0,_store_products__WEBPACK_IMPORTED_MODULE_2__.fetchProducts)());
+  }, [dispatch]);
+
+  if (error) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", {
+      className: "textColor"
+    }, "No products available at this time");
+  } else {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "textColor"
+    }, products.length ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "NLITitle"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "All Fun and Games"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "outerDiv"
+    }, products.map(product => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_NLIListProduct__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      products: product,
+      key: product.id
+    })))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", {
+      className: "textColor"
+    }, "there are no games to display currently"));
   }
-
-  render(error) {
-    if (error) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", {
-        className: "textColor"
-      }, "No products available at this time");
-    } else {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "textColor"
-      }, this.props.products.length ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "NLITitle"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "All Fun and Games"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "outerDiv"
-      }, this.props.products.map(product => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_NLIListProduct__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        products: product,
-        key: product.id
-      })))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", {
-        className: "textColor"
-      }, "there are no games to display currently"));
-    }
-  }
-
 }
 
-const mapState = state => {
-  return {
-    products: state.productsReducer
-  };
-};
-
-const mapDispatch = dispatch => {
-  return {
-    fetchProducts: () => dispatch((0,_store_products__WEBPACK_IMPORTED_MODULE_2__.fetchProducts)())
-  };
-};
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapState, mapDispatch)(NotLoggedInProducts));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (NotLoggedInProducts);
 
 /***/ }),
 
