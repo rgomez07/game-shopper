@@ -91,14 +91,12 @@ form div {
 .NLITitle{
   align-content: center;
 }
-.outerDiv{
-  border: solid 2px pink;
+.outerDiv {
+  /* border: solid 2px pink; */
   width: 100%;
-  height: 100%;
   padding: 40px;
-  display:flex;
-  /* flex-direction:column; */
-  flex-wrap:wrap;
+  display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
 }
 .NLIcontainer{
