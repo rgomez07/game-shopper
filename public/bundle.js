@@ -3140,7 +3140,7 @@ class NLIListProduct extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
 
 }
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (NLIListProduct);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.memo(NLIListProduct, () => true));
 
 /***/ }),
 

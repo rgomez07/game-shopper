@@ -31,4 +31,5 @@ class NLIListProduct extends React.Component {
     );
   }
 }
-export default NLIListProduct;
+
+export default React.memo(NLIListProduct, () => true);

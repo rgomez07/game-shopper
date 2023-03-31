@@ -93,7 +93,7 @@ form div {
 }
 .outerDiv {
   /* border: solid 2px pink; */
-  width: 100%;
+  width: 95%;
   padding: 40px;
   display: flex;
   flex-wrap: wrap;
