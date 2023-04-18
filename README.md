@@ -1,7 +1,7 @@
 # Game Shopper
 
 Welcome to GameShopper, helping you shop our variety of games
-Heroku Link
+
 This program will eventually be deployed to Heroku, but currently can only be run locally.
 
 Local Setup
