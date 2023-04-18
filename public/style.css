@@ -190,7 +190,6 @@ img {
 
   .singleProductOuterDiv{
     color: #fcfeff;
-    border: solid 2px pink;
     display: flex;
     align-items: stretch;
     /* justify-content: flex-end; */
@@ -200,17 +199,28 @@ img {
     width:60%;
   height: 500px;
   padding: 20px;
-  border: solid 2px rgb(72, 13, 234);
+  /* border: solid 2px rgb(72, 13, 234); */
   }
   .singleImage{
-  border: solid 2px rgb(234, 234, 13);
   height: 100%;
 
   }
   .singleViewInfo{
     flex-grow: 1;
-    border: solid 2px rgb(72, 234, 13);
+    /* border: solid 2px rgb(72, 234, 13); */
     width: 40%;
+    height: 465px;
     padding: 20px;
+    background-color: #2b2727;
+    border-radius: 25px;
+    margin-top: 20px;
     
+  }
+  .singleViewTopInfo{
+    /* border: solid 2px pink; */
+  }
+  .singleViewBottomInfo{
+  /* border: solid 2px rgb(234, 234, 13); */
+  margin-top: 90px;
+
   }

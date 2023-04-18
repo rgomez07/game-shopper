@@ -23,22 +23,26 @@ class SingleProduct extends React.Component {
               <img src={product.image} className='singleImage' />
             </div>
             <div className='singleViewInfo'>
-              <h2>{product.name}</h2>
-              <h3>${product.price / 100}</h3>
-              <b>Platform:</b> {product.platform}
-              <br />
-              <br />
-              <b>Description:</b> {product.description}
-              <br />
-              <br />
-              <b>ESRB:</b> {product.esrb} <br />
-              {product.multiplayer ? (
-                <b>Supports multiplayer</b>
-              ) : (
-                <b>Does not support multiplayer</b>
-              )}
-              <b>Metacritic Rating:</b> {product.rating}/100
-              <br />
+              <div className='singleViewTopInfo'>
+                <h1 className='pageTitle'>{product.name}</h1>
+                <h3>${product.price / 100}</h3>
+              </div>
+              <div className='singleViewBottomInfo'>
+                <b>Platform:</b> {product.platform}
+                <br />
+                <br />
+                <b>Description:</b> {product.description}
+                <br />
+                <br />
+                <b>ESRB:</b> {product.esrb} <br />
+                {product.multiplayer ? (
+                  <h4>Supports multiplayer</h4>
+                ) : (
+                  <h4>Does not support multiplayer</h4>
+                )}
+                <h4>Metacritic Rating:</h4> {product.rating}/100
+                <br />
+              </div>
             </div>
           </div>
         ) : (
