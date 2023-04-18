@@ -21,6 +21,7 @@ class NLIListProduct extends React.Component {
 
           <div className='description'>
             <h4>Description</h4>
+
             {products.description}
           </div>
           <div className='price'>

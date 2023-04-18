@@ -18,7 +18,6 @@ class SingleProduct extends React.Component {
 
   componentDidMount() {
     this.props.fetchSingleProduct(this.props.match.params.id);
-    console.log('this is this.props in single product', this.props);
   }
   handleClick(evt) {
     evt.preventDefault();

@@ -1,9 +1,9 @@
 body {
   font-family: sans-serif;
-  background-color:#363b41
+  background-color:#030303
 }
 .home{
-  background-color: #363b41;
+  background-color:#030303
 }
 
 a {
@@ -185,5 +185,32 @@ img {
   
     box-shadow: rgba(107, 215, 120, 0.35) 0 -25px 18px -14px inset,rgba(107, 215, 120, 0.35) 0 1px 2px,rgba(107, 215, 120, 0.35) 0 2px 4px,rgba(107, 215, 120, 0.35) 0 4px 8px,rgba(107, 215, 120, 0.35) 0 8px 16px,rgba(107, 215, 120, 0.35) 0 16px 32px;
     transform: scale(1.05) ;
+    
+  }
+
+  .singleProductOuterDiv{
+    color: #fcfeff;
+    border: solid 2px pink;
+    display: flex;
+    align-items: stretch;
+    /* justify-content: flex-end; */
+  }
+  .singleViewImage{
+  
+    width:60%;
+  height: 500px;
+  padding: 20px;
+  border: solid 2px rgb(72, 13, 234);
+  }
+  .singleImage{
+  border: solid 2px rgb(234, 234, 13);
+  height: 100%;
+
+  }
+  .singleViewInfo{
+    flex-grow: 1;
+    border: solid 2px rgb(72, 234, 13);
+    width: 40%;
+    padding: 20px;
     
   }

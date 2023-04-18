@@ -3275,10 +3275,15 @@ class SingleProduct extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   render() {
     const product = this.props.singleProduct;
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, product.name ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-      className: "textColor"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, product.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
-      src: product.image
-    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "$", product.price / 100), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("b", null, "Platform:"), " ", product.platform, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("b", null, "Description:"), " ", product.description, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("b", null, "ESRB:"), " ", product.esrb, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), product.multiplayer ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("b", null, "Supports multiplayer") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("b", null, "Does not support multiplayer"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("b", null, "Metacritic Rating:"), " ", product.rating, "/100", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_NotFound__WEBPACK_IMPORTED_MODULE_4__["default"], null));
+      className: "singleProductOuterDiv"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "singleViewImage"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+      src: product.image,
+      className: "singleImage"
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "singleViewInfo"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, product.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "$", product.price / 100), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("b", null, "Platform:"), " ", product.platform, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("b", null, "Description:"), " ", product.description, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("b", null, "ESRB:"), " ", product.esrb, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), product.multiplayer ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("b", null, "Supports multiplayer") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("b", null, "Does not support multiplayer"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("b", null, "Metacritic Rating:"), " ", product.rating, "/100", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_NotFound__WEBPACK_IMPORTED_MODULE_4__["default"], null));
   }
 
 }
@@ -3338,7 +3343,6 @@ class SingleProduct extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
 
   componentDidMount() {
     this.props.fetchSingleProduct(this.props.match.params.id);
-    console.log('this is this.props in single product', this.props);
   }
 
   handleClick(evt) {
